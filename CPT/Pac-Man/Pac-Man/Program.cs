@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GameCPT
+namespace Pac_Man
 {
     static class Program
     {

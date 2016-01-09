@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GameCPT")]
+[assembly: AssemblyTitle("Pac-Man")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GameCPT")]
+[assembly: AssemblyProduct("Pac-Man")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7039888e-2c44-47b2-95de-77ac95a490bd")]
+[assembly: Guid("94011052-d59d-4c6b-bc0a-28c8f4dda36e")]
 
 // Version information for an assembly consists of the following four values:
 //
