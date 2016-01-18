@@ -248,16 +248,63 @@ namespace Pac_Man
             //---Check Directions---
             #region Check Directions
             //Up   //<--------------------------Add Up Portal '&'
-            if (Maze[PlayerRow - 1, PlayerCol] != '#' && Maze[PlayerRow - 1, PlayerCol] != '=')
-                UpSpace = true;
+            if (Maze[PlayerRow - 1, PlayerCol] != '&')
+            {
+                if (Maze[PlayerRow - 1, PlayerCol] != '#' && Maze[PlayerRow - 1, PlayerCol] != '=')
+                    UpSpace = true;
+                else
+                    UpSpace = false;
+            }
             else
-                UpSpace = false;
+            {
+                Maze[PlayerRow, PlayerCol] = ',';
+                //Find Other teleport symbol
+                for (int r = 0; r < this.rows; r++)
+                {
+                    for (int c = 0; c < this.cols; c++)
+                    {
+                        if (r != PlayerRow - 1 || c != PlayerCol)
+                        {
+                            if (Maze[r, c] == '&')
+                                Maze[r - 2, c] = 'S';
+                        }
+                    }
+                }
+            }
+            
 
             //Down   //<--------------------------Add Down Portal '&'
-            if (Maze[PlayerRow + 1, PlayerCol] != '#' && Maze[PlayerRow + 1, PlayerCol] != '=')
-                DownSpace = true;
+            if (Maze[PlayerRow + 1, PlayerCol] != '&')
+            {
+                if (Maze[PlayerRow + 1, PlayerCol] != '#' && Maze[PlayerRow + 1, PlayerCol] != '=')
+                    DownSpace = true;
+                else
+                    DownSpace = false;
+            }
             else
-                DownSpace = false;
+            {
+                Maze[PlayerRow, PlayerCol] = ',';
+                //Find Other teleport symbol
+                for (int r = 0; r < this.rows; r++)
+                {
+                    for (int c = 0; c < this.cols; c++)
+                    {
+                        if (r != PlayerRow + 1 || c != PlayerCol)
+                        {
+                            if (Maze[r, c] == '&')
+                                Maze[r + 2, c] = 'S';
+                        }
+                    }
+                }
+            }
+
+
+            
+
+
+
+
+
 
             //Left
             if (Maze[PlayerRow, PlayerCol - 1] != '&')
