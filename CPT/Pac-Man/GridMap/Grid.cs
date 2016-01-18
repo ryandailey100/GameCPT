@@ -15,13 +15,34 @@ namespace GridMap
         private int mRows, mColumns;
         private int mCellSize;
 
-
+        char[,] Maze;
         char[,] Dots;
+
+        private int rows = 0;
+        private int cols = 0;
+
+        public char[,] GetMaze
+        {
+            get { return Maze; }
+            set { Maze = value; }
+        }
 
         public char[,] GetDots
         {
             set { Dots = value; }
             get { return Dots; }
+        }
+
+        public int GetRows
+        {
+            get { return rows; }
+            set { rows = value; }
+        }
+
+        public int GetCols
+        {
+            get { return cols; }
+            set { cols = value; }
         }
 
 

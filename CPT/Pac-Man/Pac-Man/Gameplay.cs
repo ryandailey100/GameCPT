@@ -15,30 +15,21 @@ namespace Pac_Man
     public partial class Gameplay : Form
     {
 
-        char[,] Maze;
-        int rows = 0;
-        int cols = 0;
-        Grid GridOfMap;
-
-        PlayerMovement PlayerDir = PlayerMovement.Left; //Initally starts going left
-
-        //Player(Pac-Man)
-        bool UpSpace = false;
-        bool DownSpace = false;
-        bool LeftSpace = false;
-        bool RightSpace = false;
-
-        int PlayerRow = 0;
-        int PlayerCol = 0;
+        public static Grid GridOfMap;
 
 
-        public enum PlayerMovement
-        {
-            Up,
-            Down,
-            Left,
-            Right
-        }
+        //Player Class
+        Player PlayerClass;
+
+        //Ghosts AI Class
+        GhostAI RedGhost;
+        GhostAI PinkGhost;
+        GhostAI GreenGhost;
+        GhostAI OrangeGhost;
+        
+
+
+       
         
 
         public Gameplay()
@@ -54,22 +45,18 @@ namespace Pac_Man
 
         }
 
-        
-
-
         private void Gameplay_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if (e.KeyCode == Keys.Up && UpSpace == true)// && UpSpace == true
-                PlayerDir = PlayerMovement.Up;
-            else if (e.KeyCode == Keys.Down && DownSpace == true)
-                PlayerDir = PlayerMovement.Down;
-            else if (e.KeyCode == Keys.Left && LeftSpace == true)
-                PlayerDir = PlayerMovement.Left;
-            else if (e.KeyCode == Keys.Right && RightSpace == true)
-                PlayerDir = PlayerMovement.Right;
-
-
+            if (e.KeyCode == Keys.Up && PlayerClass.GetUpSpace == true)// && UpSpace == true
+                PlayerClass.GetPlayerDir = Player.PlayerMovement.Up;
+            else if (e.KeyCode == Keys.Down && PlayerClass.GetDownSpace == true)
+                PlayerClass.GetPlayerDir = Player.PlayerMovement.Down;
+            else if (e.KeyCode == Keys.Left && PlayerClass.GetLeftSpace == true)
+                PlayerClass.GetPlayerDir = Player.PlayerMovement.Left;
+            else if (e.KeyCode == Keys.Right && PlayerClass.GetRightSpace == true)
+                PlayerClass.GetPlayerDir = Player.PlayerMovement.Right;
+            
 
         }
 
@@ -95,13 +82,34 @@ namespace Pac_Man
                 //load the file
                 StreamReader sr = new StreamReader(fd.OpenFile());
 
-                rows = int.Parse(sr.ReadLine());
-                cols = int.Parse(sr.ReadLine());
-                //initialize the Maze array
-                Maze = new char[rows, cols];
+                int rows = int.Parse(sr.ReadLine());
+                int cols = int.Parse(sr.ReadLine());
 
                 GridOfMap = new Grid(rows, cols, 20);
                 GridOfMap.GetDots = new char[rows, cols];
+
+                //initialize the Maze array
+                GridOfMap.GetMaze = new char[rows, cols];
+
+                //Set the rows and cols of map
+                GridOfMap.GetRows = rows;
+                GridOfMap.GetCols = cols;
+
+                //Create Player Class
+                PlayerClass = new Player();
+
+                //Create All 4 Ghost AI's
+                RedGhost = new GhostAI();
+                PinkGhost = new GhostAI();
+                GreenGhost = new GhostAI();
+                OrangeGhost = new GhostAI();
+
+                //Set Ghosts
+                RedGhost.GhostType = GhostAI.Ghost.Red;
+                PinkGhost.GhostType = GhostAI.Ghost.Pink;
+                GreenGhost.GhostType = GhostAI.Ghost.Green;
+                OrangeGhost.GhostType = GhostAI.Ghost.Orange;
+
 
 
                 //populate the Maze array
@@ -110,7 +118,7 @@ namespace Pac_Man
                     string line = sr.ReadLine();
                     for (int c = 0; c < cols; c++)
                     {
-                        Maze[r, c] = line[c];
+                        GridOfMap.GetMaze[r, c] = line[c];
                     }
                 }
 
@@ -120,10 +128,10 @@ namespace Pac_Man
                 {
                     for (int c = 0; c < cols; c++)
                     {
-                        if (Maze[r, c] == '.' || Maze[r, c] == '+')
+                        if (GridOfMap.GetMaze[r, c] == '.' || GridOfMap.GetMaze[r, c] == '+')
                             GridOfMap.GetDots[r, c] = '*';
                         else
-                            GridOfMap.GetDots[r, c] = Maze[r, c];
+                            GridOfMap.GetDots[r, c] = GridOfMap.GetMaze[r, c];
                     }
 
                 }
@@ -134,8 +142,8 @@ namespace Pac_Man
                 UpdateFrame();
 
                 //resize form to grid height and width
-                this.Width = this.cols * 20 + 40;
-                this.Height = this.rows * 20 + 100;
+                this.Width = GridOfMap.GetCols * 20 + 40;
+                this.Height = GridOfMap.GetRows * 20 + 100;
 
                 //tell form to redraw
                 this.Refresh();
@@ -150,249 +158,55 @@ namespace Pac_Man
 
         private void UpdateFrame()
         {
-            //Player Movement
-            //Find if you are stuck to a wall in all directions
-            #region Player Movement
-            
-            for (int r = 0; r < this.rows; r++)
-            {
-                for (int c = 0; c < this.cols; c++)
-                {
-                    if (Maze[r, c] == 'S')
-                    {
-                        ////---Check Directions---
-                        ////Up
-                        //if (Maze[r - 1, c] != '#' && Maze[r - 1, c] != '=')
-                        //    UpSpace = true;
-                        //else
-                        //    UpSpace = false;
-
-                        ////Down
-                        //if (Maze[r + 1, c] != '#' && Maze[r + 1, c] != '=')
-                        //    DownSpace = true;
-                        //else
-                        //    DownSpace = false;
-
-                        ////Left
-                        //if (Maze[r, c - 1] != '#' && Maze[r, c - 1] != '=')
-                        //    LeftSpace = true;
-                        //else
-                        //    LeftSpace = false;
-
-                        ////Right
-                        //if (Maze[r, c + 1] != '#' && Maze[r, c + 1] != '=')
-                        //    RightSpace = true;
-                        //else
-                        //    RightSpace = false;
-
-                        //Store players position on grid
-                        PlayerRow = r;
-                        PlayerCol = c;
-
-                        //Break both loops
-                        r = this.rows;
-                        break;
-                    }
-                }
-            }
+            //===Player Movement===
+            PlayerClass.UpdatePlayer();
 
 
-
-            if (PlayerDir == PlayerMovement.Up && UpSpace == true)
-            {
-                Maze[PlayerRow, PlayerCol] = '.'; //Put previous location back to a path
-                Maze[PlayerRow - 1, PlayerCol] = 'S'; //Move your pacman to the new location
-                GridOfMap.GetDots[PlayerRow - 1, PlayerCol] = ','; //Eat a dot
-
-                PlayerRow--;
-                //---Add Score Increment Here---
-
-            }
-            else if (PlayerDir == PlayerMovement.Down && DownSpace == true)
-            {
-                Maze[PlayerRow, PlayerCol] = '.'; //Put previous location back to a path
-                Maze[PlayerRow + 1, PlayerCol] = 'S'; //Move your pacman to the new location
-                GridOfMap.GetDots[PlayerRow + 1, PlayerCol] = ','; //Eat a dot
-
-                PlayerRow++;
-                //---Add Score Increment Here---
-
-            }
-            else if (PlayerDir == PlayerMovement.Left && LeftSpace == true)
-            {
-                Maze[PlayerRow, PlayerCol] = '.'; //Put previous location back to a path
-                Maze[PlayerRow, PlayerCol - 1] = 'S'; //Move your pacman to the new location
-                GridOfMap.GetDots[PlayerRow, PlayerCol - 1] = ','; //Eat a dot
-
-                PlayerCol--;
-                //---Add Score Increment Here---
-
-            }
-            else if (PlayerDir == PlayerMovement.Right && RightSpace == true)
-            {
-                Maze[PlayerRow, PlayerCol] = '.'; //Put previous location back to a path
-                Maze[PlayerRow, PlayerCol + 1] = 'S'; //Move your pacman to the new location
-                GridOfMap.GetDots[PlayerRow, PlayerCol + 1] = ','; //Eat a dot
-
-                PlayerCol++;
-                //---Add Score Increment Here---
-
-            }
-
-
-
-
-            #endregion
-
-
-            //---Check Directions---
-            #region Check Directions
-            //Up   //<--------------------------Add Up Portal '&'
-            if (Maze[PlayerRow - 1, PlayerCol] != '&')
-            {
-                if (Maze[PlayerRow - 1, PlayerCol] != '#' && Maze[PlayerRow - 1, PlayerCol] != '=')
-                    UpSpace = true;
-                else
-                    UpSpace = false;
-            }
-            else
-            {
-                Maze[PlayerRow, PlayerCol] = ',';
-                //Find Other teleport symbol
-                for (int r = 0; r < this.rows; r++)
-                {
-                    for (int c = 0; c < this.cols; c++)
-                    {
-                        if (r != PlayerRow - 1 || c != PlayerCol)
-                        {
-                            if (Maze[r, c] == '&')
-                                Maze[r - 2, c] = 'S';
-                        }
-                    }
-                }
-            }
-            
-
-            //Down   //<--------------------------Add Down Portal '&'
-            if (Maze[PlayerRow + 1, PlayerCol] != '&')
-            {
-                if (Maze[PlayerRow + 1, PlayerCol] != '#' && Maze[PlayerRow + 1, PlayerCol] != '=')
-                    DownSpace = true;
-                else
-                    DownSpace = false;
-            }
-            else
-            {
-                Maze[PlayerRow, PlayerCol] = ',';
-                //Find Other teleport symbol
-                for (int r = 0; r < this.rows; r++)
-                {
-                    for (int c = 0; c < this.cols; c++)
-                    {
-                        if (r != PlayerRow + 1 || c != PlayerCol)
-                        {
-                            if (Maze[r, c] == '&')
-                                Maze[r + 2, c] = 'S';
-                        }
-                    }
-                }
-            }
-
-
+            //===Ghosts AI===
+            //Red Ghost
+            RedGhost.UpdateAI();
+            //Pink Ghost
+            PinkGhost.UpdateAI();
+            //Green Ghost
+            GreenGhost.UpdateAI();
+            //Orange Ghost
+            OrangeGhost.UpdateAI();
             
 
 
-
-
-
-
-            //Left
-            if (Maze[PlayerRow, PlayerCol - 1] != '&')
-            {
-                if (Maze[PlayerRow, PlayerCol - 1] != '#' && Maze[PlayerRow, PlayerCol - 1] != '=')
-                    LeftSpace = true;
-                else
-                    LeftSpace = false;
-            }
-            else
-            {
-                Maze[PlayerRow, PlayerCol] = ',';
-                //Find Other teleport symbol
-                for (int r = 0; r < this.rows; r++)
-                {
-                    for (int c = 0; c < this.cols; c++)
-                    {
-                        if (r != PlayerRow || c != PlayerCol - 1)
-                        {
-                            if (Maze[r, c] == '&')
-                                Maze[r, c - 2] = 'S';
-                        }
-                    }
-                }
-            }
-
-            //Right
-            if (Maze[PlayerRow, PlayerCol + 1] != '&')
-            {
-                if (Maze[PlayerRow, PlayerCol + 1] != '#' && Maze[PlayerRow, PlayerCol + 1] != '=')
-                    RightSpace = true;
-                else
-                    RightSpace = false;
-            }
-            else
-            {
-                Maze[PlayerRow, PlayerCol] = ',';
-                //Find Other teleport symbol
-                for (int r = 0; r < this.rows; r++)
-                {
-                    for (int c = 0; c < this.cols; c++)
-                    {
-                        if (r != PlayerRow || c != PlayerCol + 1)
-                        {
-                            if (Maze[r, c] == '&')
-                                Maze[r, c + 2] = 'S';
-                        }
-                    }
-                }
-            }
-
-            #endregion
-
-
-            //Paint grid
+            //Paint grid <---Add this into the grid class------------<-----------<--------<--------<-----<<<<<<----<<<---
             #region Paint Grid
-            for (int r = 0; r < this.rows; r++)
+            for (int r = 0; r < GridOfMap.GetRows; r++)
             {
-                for (int c = 0; c < this.cols; c++)
+                for (int c = 0; c < GridOfMap.GetCols; c++)
                 {
                     #region Map
-                    //change colour of cell depending on what
-                    //is in it
-                    if (Maze[r, c] == '#')
+                    //change colour of cell depending on what is in it
+                    if (GridOfMap.GetMaze[r, c] == '#')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Blue;
-                    else if (Maze[r, c] == '.')
+                    else if (GridOfMap.GetMaze[r, c] == '.')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (Maze[r, c] == ',')
+                    else if (GridOfMap.GetMaze[r, c] == ',')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (Maze[r, c] == '+')
+                    else if (GridOfMap.GetMaze[r, c] == '+')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (Maze[r, c] == 'x')
+                    else if (GridOfMap.GetMaze[r, c] == 'x')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (Maze[r, c] == '&')
+                    else if (GridOfMap.GetMaze[r, c] == '&')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (Maze[r, c] == 'o')
+                    else if (GridOfMap.GetMaze[r, c] == 'o')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (Maze[r, c] == '=')
+                    else if (GridOfMap.GetMaze[r, c] == '=')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (Maze[r, c] == 'S')
+                    else if (GridOfMap.GetMaze[r, c] == 'S')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Yellow;
-                    else if (Maze[r, c] == 'R')
+                    else if (GridOfMap.GetMaze[r, c] == 'R')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Red;
-                    else if (Maze[r, c] == 'P')
+                    else if (GridOfMap.GetMaze[r, c] == 'P')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Pink;
-                    else if (Maze[r, c] == 'G')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Green;
-                    else if (Maze[r, c] == 'O')
+                    else if (GridOfMap.GetMaze[r, c] == 'G')
+                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Cyan;
+                    else if (GridOfMap.GetMaze[r, c] == 'O')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Orange;
                     #endregion
 
@@ -401,19 +215,16 @@ namespace Pac_Man
 
             this.Refresh();
             #endregion
+            
 
+            //Update label
+            lbl_Score.Text = PlayerClass.GetScore.ToString();
 
         }
 
-        private void Gameplay_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Down:
-                case Keys.Up:
-                    e.IsInputKey = true;
-                    break;
-            }
-        }
+
+
+
+        
     }
 }

@@ -32,8 +32,8 @@
             this.TimerUpdate = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbl_Score = new System.Windows.Forms.Label();
+            this.lbl_Lives = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -62,25 +62,25 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Score:";
             // 
-            // label2
+            // lbl_Score
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(381, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 42);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "0";
+            this.lbl_Score.AutoSize = true;
+            this.lbl_Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Score.Location = new System.Drawing.Point(381, 44);
+            this.lbl_Score.Name = "lbl_Score";
+            this.lbl_Score.Size = new System.Drawing.Size(40, 42);
+            this.lbl_Score.TabIndex = 2;
+            this.lbl_Score.Text = "0";
             // 
-            // label3
+            // lbl_Lives
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(138, 44);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 42);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "3";
+            this.lbl_Lives.AutoSize = true;
+            this.lbl_Lives.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Lives.Location = new System.Drawing.Point(138, 44);
+            this.lbl_Lives.Name = "lbl_Lives";
+            this.lbl_Lives.Size = new System.Drawing.Size(40, 42);
+            this.lbl_Lives.TabIndex = 4;
+            this.lbl_Lives.Text = "3";
             // 
             // label4
             // 
@@ -97,9 +97,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 626);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lbl_Lives);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbl_Score);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -109,7 +109,6 @@
             this.Text = "NOT Pac-Man";
             this.Load += new System.EventHandler(this.Gameplay_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gameplay_KeyDown);
-            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Gameplay_PreviewKeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,8 +118,8 @@
         private System.Windows.Forms.Timer TimerUpdate;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_Score;
+        private System.Windows.Forms.Label lbl_Lives;
         private System.Windows.Forms.Label label4;
     }
 }
