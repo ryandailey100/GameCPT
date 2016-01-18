@@ -246,29 +246,71 @@ namespace Pac_Man
 
 
             //---Check Directions---
-            //Up
+            #region Check Directions
+            //Up   //<--------------------------Add Up Portal '&'
             if (Maze[PlayerRow - 1, PlayerCol] != '#' && Maze[PlayerRow - 1, PlayerCol] != '=')
                 UpSpace = true;
             else
                 UpSpace = false;
 
-            //Down
+            //Down   //<--------------------------Add Down Portal '&'
             if (Maze[PlayerRow + 1, PlayerCol] != '#' && Maze[PlayerRow + 1, PlayerCol] != '=')
                 DownSpace = true;
             else
                 DownSpace = false;
 
             //Left
-            if (Maze[PlayerRow, PlayerCol - 1] != '#' && Maze[PlayerRow, PlayerCol - 1] != '=')
-                LeftSpace = true;
+            if (Maze[PlayerRow, PlayerCol - 1] != '&')
+            {
+                if (Maze[PlayerRow, PlayerCol - 1] != '#' && Maze[PlayerRow, PlayerCol - 1] != '=')
+                    LeftSpace = true;
+                else
+                    LeftSpace = false;
+            }
             else
-                LeftSpace = false;
+            {
+                Maze[PlayerRow, PlayerCol] = ',';
+                //Find Other teleport symbol
+                for (int r = 0; r < this.rows; r++)
+                {
+                    for (int c = 0; c < this.cols; c++)
+                    {
+                        if (r != PlayerRow || c != PlayerCol - 1)
+                        {
+                            if (Maze[r, c] == '&')
+                                Maze[r, c - 2] = 'S';
+                        }
+                    }
+                }
+            }
 
             //Right
-            if (Maze[PlayerRow, PlayerCol + 1] != '#' && Maze[PlayerRow, PlayerCol + 1] != '=')
-                RightSpace = true;
+            if (Maze[PlayerRow, PlayerCol + 1] != '&')
+            {
+                if (Maze[PlayerRow, PlayerCol + 1] != '#' && Maze[PlayerRow, PlayerCol + 1] != '=')
+                    RightSpace = true;
+                else
+                    RightSpace = false;
+            }
             else
-                RightSpace = false;
+            {
+                Maze[PlayerRow, PlayerCol] = ',';
+                //Find Other teleport symbol
+                for (int r = 0; r < this.rows; r++)
+                {
+                    for (int c = 0; c < this.cols; c++)
+                    {
+                        if (r != PlayerRow || c != PlayerCol + 1)
+                        {
+                            if (Maze[r, c] == '&')
+                                Maze[r, c + 2] = 'S';
+                        }
+                    }
+                }
+            }
+
+            #endregion
+
 
             //Paint grid
             #region Paint Grid
