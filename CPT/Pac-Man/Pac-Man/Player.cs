@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GridMap;
 
 namespace Pac_Man
 {
-    class Player
+    public class Player
     {
-        //Grid GridOfMap;
-        
-
+       
         private int Score = 0;
         private int Lives = 0;
 
@@ -63,7 +60,15 @@ namespace Pac_Man
             get { return RightSpace; }
         }
 
+        public int GetPlayerRow
+        {
+            get { return PlayerRow; }
+        }
 
+        public int GetPlayerCol
+        {
+            get { return PlayerCol; }
+        }
 
         public int GetScore
         {

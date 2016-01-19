@@ -19,7 +19,7 @@ namespace Pac_Man
 
 
         //Player Class
-        Player PlayerClass;
+        public static Player PlayerClass;
 
         //Ghosts AI Class
         GhostAI RedGhost;
@@ -104,11 +104,11 @@ namespace Pac_Man
                 GreenGhost = new GhostAI();
                 OrangeGhost = new GhostAI();
 
-                //Set Ghosts
-                RedGhost.GhostType = GhostAI.Ghost.Red;
-                PinkGhost.GhostType = GhostAI.Ghost.Pink;
-                GreenGhost.GhostType = GhostAI.Ghost.Green;
-                OrangeGhost.GhostType = GhostAI.Ghost.Orange;
+                ////Set Ghosts
+                //RedGhost.GhostType = GhostAI.Ghost.Red;
+                //PinkGhost.GhostType = GhostAI.Ghost.Pink;
+                //GreenGhost.GhostType = GhostAI.Ghost.Green;
+                //OrangeGhost.GhostType = GhostAI.Ghost.Orange;
 
 
 
@@ -164,13 +164,13 @@ namespace Pac_Man
 
             //===Ghosts AI===
             //Red Ghost
-            RedGhost.UpdateAI();
+            RedGhost.UpdateAI(GhostAI.Ghost.Red);
             //Pink Ghost
-            PinkGhost.UpdateAI();
+            PinkGhost.UpdateAI(GhostAI.Ghost.Pink);
             //Green Ghost
-            GreenGhost.UpdateAI();
+            GreenGhost.UpdateAI(GhostAI.Ghost.Green);
             //Orange Ghost
-            OrangeGhost.UpdateAI();
+            OrangeGhost.UpdateAI(GhostAI.Ghost.Orange);
             
 
 
