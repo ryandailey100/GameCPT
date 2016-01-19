@@ -22,6 +22,8 @@ namespace Pac_Man
         {
             timerArrow.Start();
             pic_Arrow.Location = new Point(294, 306);
+            lblOn.Location = new Point(462, 325);
+            lblOff.Location = new Point(550, 325);
             this.BackgroundImage = Resource1.Menu___Blank;
 
         }
@@ -35,29 +37,34 @@ namespace Pac_Man
 
             }
 
-            if (e.KeyCode == Keys.Up && pic_Arrow.Location.Y == 345)
+            else if (e.KeyCode == Keys.Up && pic_Arrow.Location.Y == 345)
             {
                 pic_Arrow.Location = new Point(294, 306);
 
             }
 
-            //Username mnu
-            if (e.KeyCode == Keys.Enter && pic_Arrow.Location.Y == 306)
+            //map selection mnu
+            else if (e.KeyCode == Keys.Enter && pic_Arrow.Location.Y == 306)
             {
-                pic_Arrow.Location = new Point(248, 315);
-
-                this.BackgroundImage = Resource1.Menu___Name;
+                this.BackgroundImage = Resource1.Menu___Maps;
+                ListMaps.Visible = true;
+                pic_Arrow.Location = new Point(61, 309);
             }
 
-            if (e.KeyCode == Keys.Escape && pic_Arrow.Location.X == 248)
+            //back buttton
+            else if (e.KeyCode == Keys.Escape && pic_Arrow.Location.X == 248)
             {
+                ListMaps.Visible = false;
+                lblOff.Visible = false;
+                lblOn.Visible = false;
+
                 pic_Arrow.Location = new Point(294, 306);
 
                 this.BackgroundImage = Resource1.Menu___Blank;
             }
 
             //Options mnu
-            if (e.KeyCode == Keys.Enter && pic_Arrow.Location.Y == 345)
+            else if (e.KeyCode == Keys.Enter && pic_Arrow.Location.Y == 345)
             {
                 lblOff.Visible = true;
                 lblOn.Visible = true;
@@ -67,29 +74,29 @@ namespace Pac_Man
                 this.BackgroundImage = Resource1.Menu___Options;
             }
 
-            if (e.KeyCode == Keys.Left & pic_Arrow.Location.X == 520)
+            else if (e.KeyCode == Keys.Left & pic_Arrow.Location.X == 520)
             {
                 pic_Arrow.Location = new Point(430, 324);
             }
 
-            if (e.KeyCode == Keys.Right && pic_Arrow.Location.X == 430)
+            else if (e.KeyCode == Keys.Right && pic_Arrow.Location.X == 430)
             {
                 pic_Arrow.Location = new Point(520, 324);
             }
 
-            if (e.KeyCode == Keys.Enter && pic_Arrow.Location.X == 520)
+            else if (e.KeyCode == Keys.Enter && pic_Arrow.Location.X == 520)
             {
                 lblOff.ForeColor = Color.Maroon;
                 lblOn.ForeColor = Color.White;
             }
 
-            if (e.KeyCode == Keys.Enter && pic_Arrow.Location.X == 430)
+            else if (e.KeyCode == Keys.Enter && pic_Arrow.Location.X == 430)
             {
                 lblOff.ForeColor = Color.White;
                 lblOn.ForeColor = Color.Maroon;
             }
 
-            if (e.KeyCode == Keys.Escape && pic_Arrow.Location.X == 430 || pic_Arrow.Location.X == 520)
+            else if (e.KeyCode == Keys.Escape && pic_Arrow.Location.X == 430 || pic_Arrow.Location.X == 520)
             {
                 pic_Arrow.Location = new Point(294, 306);
 
