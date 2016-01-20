@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,20 @@ namespace Pac_Man
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //default home screen 
             timerArrow.Start();
             pic_Arrow.Location = new Point(294, 306);
             lblOn.Location = new Point(462, 325);
             lblOff.Location = new Point(550, 325);
             this.BackgroundImage = Resource1.Menu___Blank;
+
+            //create high score file
+            string path = @"C:\Users\069478717\AppData\Roaming\HighScore.txt";
+            if (!File.Exists(path))
+            {
+                File.Create(path);
+            }
+
 
         }
 

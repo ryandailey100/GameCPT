@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -131,6 +132,7 @@ namespace Pac_Man
 
                 Gameplay.GridOfMap.GetDots[PlayerRow - 1, PlayerCol] = ','; //Eat a dot
                 PlayerRow--;
+
             }
             else if (PlayerDir == PlayerMovement.Down && DownSpace == true)
             {
@@ -194,6 +196,22 @@ namespace Pac_Man
 
                 Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol + 1] = ','; //Eat a dot
                 PlayerCol++;
+
+                //save score to txt file
+                if (Lives == 0)
+                {
+                    // create a writer and open the file
+                    TextWriter tw = new StreamWriter(@"C:\Users\069478717\AppData\Roaming\HighScore.txt");
+
+                    // write a line of text to the file
+                    tw.WriteLine(Score);
+
+                    // close the stream
+                    tw.Close();
+                }
+
+
+
             }
             #endregion
             
