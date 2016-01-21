@@ -197,18 +197,18 @@ namespace Pac_Man
                 Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol + 1] = ','; //Eat a dot
                 PlayerCol++;
 
-                //save score to txt file
-                if (Lives == 0)
-                {
-                    // create a writer and open the file
-                    TextWriter tw = new StreamWriter(@"C:\Users\069478717\AppData\Roaming\HighScore.txt");
+                ////save score to txt file
+                //if (Lives == 0)
+                //{
+                //    //// create a writer and open the file
+                //    //TextWriter tw = new StreamWriter(@"C:\Users\069478717\AppData\Roaming\HighScore.txt");
 
-                    // write a line of text to the file
-                    tw.WriteLine(Score);
+                //    //// write a line of text to the file
+                //    //tw.WriteLine(Score);
 
-                    // close the stream
-                    tw.Close();
-                }
+                //    //// close the stream
+                //    //tw.Close();
+                //}
 
 
 

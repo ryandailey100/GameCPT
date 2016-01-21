@@ -103,14 +103,7 @@ namespace Pac_Man
                 PinkGhost = new GhostAI();
                 GreenGhost = new GhostAI();
                 OrangeGhost = new GhostAI();
-
-                ////Set Ghosts
-                //RedGhost.GhostType = GhostAI.Ghost.Red;
-                //PinkGhost.GhostType = GhostAI.Ghost.Pink;
-                //GreenGhost.GhostType = GhostAI.Ghost.Green;
-                //OrangeGhost.GhostType = GhostAI.Ghost.Orange;
-
-
+                
 
                 //populate the Maze array
                 for (int r = 0; r < rows; r++)
