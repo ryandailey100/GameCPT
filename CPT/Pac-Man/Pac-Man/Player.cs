@@ -201,9 +201,9 @@ namespace Pac_Man
                 //if (Lives == 0)
                 //{
                 //    //// create a writer and open the file
-                //    //TextWriter tw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "HighScore.txt");
+                //    //TextWriter tw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\HighScore.txt");
 
-                //    //// write a line of text to the file
+                //    ////write a line of text to the file
                 //    //tw.WriteLine(Score);
 
                 //    //// close the stream

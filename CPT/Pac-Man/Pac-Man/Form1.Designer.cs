@@ -82,9 +82,9 @@
             // 
             this.ListMaps.BackColor = System.Drawing.SystemColors.InfoText;
             this.ListMaps.FormattingEnabled = true;
-            this.ListMaps.Location = new System.Drawing.Point(93, 300);
+            this.ListMaps.Location = new System.Drawing.Point(93, 313);
             this.ListMaps.Name = "ListMaps";
-            this.ListMaps.Size = new System.Drawing.Size(269, 251);
+            this.ListMaps.Size = new System.Drawing.Size(259, 238);
             this.ListMaps.TabIndex = 3;
             this.ListMaps.Visible = false;
             // 
