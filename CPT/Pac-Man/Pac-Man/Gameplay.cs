@@ -98,11 +98,6 @@ namespace Pac_Man
                 //Create Player Class
                 PlayerClass = new Player();
 
-                //Create All 4 Ghost AI's
-                RedGhost = new GhostAI();
-                PinkGhost = new GhostAI();
-                GreenGhost = new GhostAI();
-                OrangeGhost = new GhostAI();
                 
 
                 //populate the Maze array
@@ -128,6 +123,12 @@ namespace Pac_Man
                     }
 
                 }
+
+                //Create All 4 Ghost AI's
+                RedGhost = new GhostAI(GhostAI.Ghost.Red);
+                //PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
+                //GreenGhost = new GhostAI(GhostAI.Ghost.Green);
+                //OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
 
 
 
@@ -157,13 +158,13 @@ namespace Pac_Man
 
             //===Ghosts AI===
             //Red Ghost
-            RedGhost.UpdateAI(GhostAI.Ghost.Red);
+            RedGhost.UpdateAI();
             //Pink Ghost
-            PinkGhost.UpdateAI(GhostAI.Ghost.Pink);
+            //PinkGhost.UpdateAI();
             //Green Ghost
-            GreenGhost.UpdateAI(GhostAI.Ghost.Green);
+            //GreenGhost.UpdateAI();
             //Orange Ghost
-            OrangeGhost.UpdateAI(GhostAI.Ghost.Orange);
+            //OrangeGhost.UpdateAI();
             
 
 
@@ -180,10 +181,6 @@ namespace Pac_Man
                     else if (GridOfMap.GetMaze[r, c] == '.')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
                     else if (GridOfMap.GetMaze[r, c] == ',')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (GridOfMap.GetMaze[r, c] == '+')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (GridOfMap.GetMaze[r, c] == 'x')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
                     else if (GridOfMap.GetMaze[r, c] == '&')
                         GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
