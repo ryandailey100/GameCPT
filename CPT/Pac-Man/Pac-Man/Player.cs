@@ -201,7 +201,7 @@ namespace Pac_Man
                 //if (Lives == 0)
                 //{
                 //    //// create a writer and open the file
-                //    //TextWriter tw = new StreamWriter(@"C:\Users\069478717\AppData\Roaming\HighScore.txt");
+                //    //TextWriter tw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "HighScore.txt");
 
                 //    //// write a line of text to the file
                 //    //tw.WriteLine(Score);
@@ -214,7 +214,7 @@ namespace Pac_Man
 
             }
             #endregion
-            
+
             //---Check Directions---
             #region Check Directions
             //Up 

@@ -28,13 +28,12 @@ namespace Pac_Man
             lblOff.Location = new Point(550, 325);
             this.BackgroundImage = Resource1.Menu___Blank;
 
-            //create high score file
-            string path = @"C:\Users\069478717\AppData\Roaming\HighScore.txt";
-            if (!File.Exists(path))
+            //create application folder structure
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Local\Not-Pacman"))
             {
-                File.Create(path);
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps");
+                File.Create((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\HighScore.txt"));
             }
-
 
         }
 
