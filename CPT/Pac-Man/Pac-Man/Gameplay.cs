@@ -21,15 +21,11 @@ namespace Pac_Man
         //Player Class
         public static Player PlayerClass;
 
-        //Ghosts AI Class
-        GhostAI RedGhost;
-        GhostAI PinkGhost;
-        GhostAI GreenGhost;
-        GhostAI OrangeGhost;
-        
-
-
-       
+        //Ghosts AI Class (make array of objects (eg. Tv shows program)) <<<<-----------
+        static GhostAI RedGhost;
+        static GhostAI PinkGhost;
+        static GhostAI GreenGhost;
+        static GhostAI OrangeGhost;
         
 
         public Gameplay()
@@ -90,16 +86,13 @@ namespace Pac_Man
 
                 //initialize the Maze array
                 GridOfMap.GetMaze = new char[rows, cols];
+                GridOfMap.GetOriginalMaze = new char[rows, cols];
 
                 //Set the rows and cols of map
                 GridOfMap.GetRows = rows;
                 GridOfMap.GetCols = cols;
 
-                //Create Player Class
-                PlayerClass = new Player();
-
                 
-
                 //populate the Maze array
                 for (int r = 0; r < rows; r++)
                 {
@@ -107,6 +100,7 @@ namespace Pac_Man
                     for (int c = 0; c < cols; c++)
                     {
                         GridOfMap.GetMaze[r, c] = line[c];
+                        GridOfMap.GetOriginalMaze[r, c] = line[c];
                     }
                 }
 
@@ -124,9 +118,12 @@ namespace Pac_Man
 
                 }
 
+                //Create Player Class
+                PlayerClass = new Player();
+                
                 //Create All 4 Ghost AI's
                 RedGhost = new GhostAI(GhostAI.Ghost.Red);
-                //PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
+                PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
                 //GreenGhost = new GhostAI(GhostAI.Ghost.Green);
                 //OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
 
@@ -160,7 +157,7 @@ namespace Pac_Man
             //Red Ghost
             RedGhost.UpdateAI();
             //Pink Ghost
-            //PinkGhost.UpdateAI();
+            PinkGhost.UpdateAI();
             //Green Ghost
             //GreenGhost.UpdateAI();
             //Orange Ghost
@@ -208,13 +205,28 @@ namespace Pac_Man
             
 
             //Update label
-            lbl_Score.Text = PlayerClass.GetScore.ToString();
+            lbl_Score.Text = GridOfMap.GetScore.ToString();
+            lbl_Lives.Text = GridOfMap.GetLives.ToString();
+
+        }
+
+        public static void ResetObjects()
+        {
+            //Player
+            PlayerClass = new Player();
+
+            //Ghosts
+            RedGhost = new GhostAI(GhostAI.Ghost.Red);
+            PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
+            //GreenGhost = new GhostAI(GhostAI.Ghost.Green);
+            //OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
+        }
+
+        public static void GameOver()
+        {
 
         }
 
 
-
-
-        
     }
 }

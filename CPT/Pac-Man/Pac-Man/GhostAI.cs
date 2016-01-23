@@ -16,7 +16,7 @@ namespace Pac_Man
         int row_Position = 0;
         int col_Position = 0;
 
-        GhostMovement Dir_Ghost = GhostMovement.Up;
+        GhostMovement Dir_Ghost = GhostMovement.Left;
 
         Ghost GhostType;
 
@@ -72,13 +72,18 @@ namespace Pac_Man
             Up,
             Down,
             Left,
-            Right
+            Right,
+            Nil
         }
 
         public void UpdateAI()
         {
+            //Check for death
+            CheckForDeath();
+
+            
             //If Ghost hits a intersection, then find path to pacman. Else, continue moving in direction (Dir_Ghost)
-            if (((Dir_Ghost == GhostMovement.Up || Dir_Ghost == GhostMovement.Down) && (Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == '.' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == '.')) || ((Dir_Ghost == GhostMovement.Left || Dir_Ghost == GhostMovement.Right) && (Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == '.' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == '.'))) //When up or down, check left and right. Or when left or right, check up and down. Then, find a new path to Pac-Man
+            if (((Dir_Ghost == GhostMovement.Up || Dir_Ghost == GhostMovement.Down) && (Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == '.' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == '.' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == ',' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == ',')) || ((Dir_Ghost == GhostMovement.Left || Dir_Ghost == GhostMovement.Right) && (Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == '.' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == '.' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == ',' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == ','))) //When up or down, check left and right. Or when left or right, check up and down. Then, find a new path to Pac-Man
             {
                 //===Find Location Point===
                 #region Find Point Location
@@ -176,7 +181,8 @@ namespace Pac_Man
 
 
                 //Find Direction to Point (by finding a path)
-                Dir_Ghost = FindPath(Point_row, Point_col);
+                //Dir_Ghost = FindPath(Point_row, Point_col, row_Position, col_Position, GhostMovement.Nil, GhostMovement.Nil);
+                Dir_Ghost = PathDir(Point_row, Point_col, row_Position, col_Position);
             }
             else //Dont find path, continue moving in direction (inertia)
             {
@@ -224,24 +230,138 @@ namespace Pac_Man
                 Gameplay.GridOfMap.GetMaze[row_Position, col_Position] = GhostSymbol;
             }
             #endregion
-            
+
+
+            //Check for death
+            CheckForDeath();
+
         }
 
-       
-        private GhostMovement FindPath(int row, int col)
+        private GhostMovement PathDir(int RowPoint, int ColPoint, int GhostRow, int GhostCol)
         {
-            //Race to the Pac-Man. Winner gets to have their initial direction used (return)
-            if (Gameplay.GridOfMap.GetMaze[row, col] == 'S')
+            //char[,] MazeCopy = new char[Gameplay.GridOfMap.GetRows, Gameplay.GridOfMap.GetCols];
+            //for (int r = 0; r < Gameplay.GridOfMap.GetRows; r++)
+            //{
+            //    for (int c = 0; c < Gameplay.GridOfMap.GetCols; c++)
+            //    {
+            //        MazeCopy[r, c] = Gameplay.GridOfMap.GetMaze[r, c];
+            //    }
+            //}
+
+            //Going left or right and hits intersection with up or down being a option. Chooses better option
+            if (Dir_Ghost != GhostMovement.Down && FindPath(GhostRow - 1, GhostCol, RowPoint, ColPoint, FreshMaze()) == true && Dir_Ghost != GhostMovement.Up && FindPath(GhostRow + 1, GhostCol, RowPoint, ColPoint, FreshMaze()) == true)
             {
-                
+                if (row_Position < RowPoint)
+                    return GhostMovement.Down;
+                else
+                    return GhostMovement.Up;
+            }
+            else if (Dir_Ghost != GhostMovement.Right && FindPath(GhostRow, GhostCol - 1, RowPoint, ColPoint, FreshMaze()) == true && Dir_Ghost != GhostMovement.Left && FindPath(GhostRow, GhostCol + 1, RowPoint, ColPoint, FreshMaze()) == true)
+            {
+                if (col_Position < ColPoint)
+                    return GhostMovement.Right;
+                else
+                    return GhostMovement.Left;
+            }
+            else
+            {
+                if (Dir_Ghost != GhostMovement.Down && FindPath(GhostRow - 1, GhostCol, RowPoint, ColPoint, FreshMaze()) == true) //Up
+                {
+                    return GhostMovement.Up;
+                }
+                else if (Dir_Ghost != GhostMovement.Up && FindPath(GhostRow + 1, GhostCol, RowPoint, ColPoint, FreshMaze()) == true) //Down
+                {
+                    return GhostMovement.Down;
+                }
+                else if (Dir_Ghost != GhostMovement.Right && FindPath(GhostRow, GhostCol - 1, RowPoint, ColPoint, FreshMaze()) == true) //Left
+                {
+                    return GhostMovement.Left;
+                }
+                else if (Dir_Ghost != GhostMovement.Left && FindPath(GhostRow, GhostCol + 1, RowPoint, ColPoint, FreshMaze()) == true) //Right
+                {
+                    return GhostMovement.Right;
+                }
+            }
+            
+
+            return GhostMovement.Nil;
+        }
+
+        private bool FindPath(int row, int col, int PointRow, int PointCol, char[,] MazeArray)
+        {
+            //Check if out of bounds
+            if (row < 0 || row >= Gameplay.GridOfMap.GetRows || col < 0 || col >= Gameplay.GridOfMap.GetCols)
+                return false;
+
+            //If it found the point
+            if (row == PointRow && col == PointCol)
+                return true;
+
+            //If it is not on the path
+            if (MazeArray[row, col] != '.' && MazeArray[row, col] != ',' && MazeArray[row, col] != 'o' && MazeArray[row, col] != 'S')
+                return false;
+
+            MazeArray[row, col] = 'k';
+
+            //Check all directions
+            if (FindPath(row - 1, col, PointRow, PointCol, MazeArray) == true) //Up
+                return true;
+            if (FindPath(row, col - 1, PointRow, PointCol, MazeArray) == true) //Left
+                return true;
+            if (FindPath(row + 1, col, PointRow, PointCol, MazeArray) == true) //Down
+                return true;
+            if (FindPath(row, col + 1, PointRow, PointCol, MazeArray) == true) //Right
+                return true;
+
+
+            //Exit recursion if all else fails
+            MazeArray[row, col] = 'j';
+            return false;
+        }
+
+        private char[,] FreshMaze()
+        {
+            char[,] MazeCopy = new char[Gameplay.GridOfMap.GetRows, Gameplay.GridOfMap.GetCols];
+            for (int r = 0; r < Gameplay.GridOfMap.GetRows; r++)
+            {
+                for (int c = 0; c < Gameplay.GridOfMap.GetCols; c++)
+                {
+                    MazeCopy[r, c] = Gameplay.GridOfMap.GetMaze[r, c];
+                }
             }
 
-
-
-            return FindPath(row, col);
-            //return GhostMovement.Up;
+            return MazeCopy;
         }
-        
+
+        private void CheckForDeath()
+        {
+            if (row_Position == Gameplay.PlayerClass.GetPlayerRow && col_Position == Gameplay.PlayerClass.GetPlayerCol)
+            {
+                if (Gameplay.GridOfMap.GetScore <= 0)
+                {
+                    //Game Over
+                    Gameplay.GameOver();
+                }
+                else
+                {
+                    Gameplay.GridOfMap.SubtractLife();
+
+                    //Spawn everything back to normal
+                    for (int r = 0; r < Gameplay.GridOfMap.GetRows; r++)
+                    {
+                        for (int c = 0; c < Gameplay.GridOfMap.GetCols; c++)
+                        {
+                            Gameplay.GridOfMap.GetMaze[r, c] = Gameplay.GridOfMap.GetOriginalMaze[r, c];
+                        }
+                    }
+
+                    //reset all ghosts and player classes
+                    Gameplay.ResetObjects();
+                }
+                
+
+            }
+        }
 
 
     }

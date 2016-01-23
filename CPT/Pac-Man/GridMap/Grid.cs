@@ -17,9 +17,35 @@ namespace GridMap
 
         char[,] Maze;
         char[,] Dots;
+        char[,] OriginalMaze;
 
         private int rows = 0;
         private int cols = 0;
+
+        private int Score = 0;
+        private int Lives = 3;
+
+        public int GetScore
+        {
+            get { return Score; }
+            set { Score = value; }
+        }
+
+        public int GetLives
+        {
+            get { return Lives; }
+            set { Lives = value; }
+        }
+
+        public void AddLife()
+        {
+            Lives++;
+        }
+
+        public void SubtractLife()
+        {
+            Lives--;
+        }
 
         public char[,] GetMaze
         {
@@ -31,6 +57,12 @@ namespace GridMap
         {
             set { Dots = value; }
             get { return Dots; }
+        }
+
+        public char[,] GetOriginalMaze
+        {
+            get { return OriginalMaze; }
+            set { OriginalMaze = value; }
         }
 
         public int GetRows

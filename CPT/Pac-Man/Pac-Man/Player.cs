@@ -10,8 +10,7 @@ namespace Pac_Man
     public class Player
     {
        
-        private int Score = 0;
-        private int Lives = 0;
+        
 
         private int row_Initial = 0;
         private int col_Initial = 0;
@@ -27,6 +26,29 @@ namespace Pac_Man
 
         PlayerMovement PlayerDir = PlayerMovement.Left; //Initally starts going left
 
+        public Player()
+        {
+            for (int r = 0; r < Gameplay.GridOfMap.GetRows; r++)
+            {
+                for (int c = 0; c < Gameplay.GridOfMap.GetCols; c++)
+                {
+                    if (Gameplay.GridOfMap.GetMaze[r, c] == 'S')
+                    {
+                        //Store players position on grid
+                        row_Initial = r;
+                        col_Initial = c;
+
+                        PlayerRow = r;
+                        PlayerCol = c;
+
+                        //Break both loops
+                        r = Gameplay.GridOfMap.GetRows;
+                        break;
+                    }
+                }
+            }
+        }
+
         public PlayerMovement GetPlayerDir
         {
             get { return PlayerDir; }
@@ -39,6 +61,16 @@ namespace Pac_Man
             Down,
             Left,
             Right
+        }
+
+        public int GetInitialRow
+        {
+            get { return row_Initial; }
+        }
+
+        public int GetInitialCol
+        {
+            get { return col_Initial; }
         }
 
         public bool GetUpSpace
@@ -71,25 +103,7 @@ namespace Pac_Man
             get { return PlayerCol; }
         }
 
-        public int GetScore
-        {
-            get { return Score; }
-        }
-
-        public int GetLives
-        {
-            get { return Lives; }
-        }
-
-        public void AddLife()
-        {
-            Lives++;
-        }
-
-        public void SubtractLife()
-        {
-            Lives--;
-        }
+       
 
 
         public void UpdatePlayer()
@@ -123,11 +137,11 @@ namespace Pac_Man
                 //---Add Score Increment Here---
                 if (Gameplay.GridOfMap.GetDots[PlayerRow - 1, PlayerCol] == '*')
                 {
-                    Score += 10; //Adds 10
+                    Gameplay.GridOfMap.GetScore += 10; //Adds 10
                 }
                 else if (Gameplay.GridOfMap.GetDots[PlayerRow - 1, PlayerCol] == 'o')
                 {
-                    Score += 50; //Adds 50
+                    Gameplay.GridOfMap.GetScore += 50; //Adds 50
                 }
 
                 Gameplay.GridOfMap.GetDots[PlayerRow - 1, PlayerCol] = ','; //Eat a dot
@@ -144,11 +158,11 @@ namespace Pac_Man
                 //---Add Score Increment Here---
                 if (Gameplay.GridOfMap.GetDots[PlayerRow + 1, PlayerCol] == '*')
                 {
-                    Score += 10; //Adds 10
+                    Gameplay.GridOfMap.GetScore += 10; //Adds 10
                 }
                 else if (Gameplay.GridOfMap.GetDots[PlayerRow + 1, PlayerCol] == 'o')
                 {
-                    Score += 50; //Adds 50
+                    Gameplay.GridOfMap.GetScore += 50; //Adds 50
                 }
 
 
@@ -165,11 +179,11 @@ namespace Pac_Man
                 //---Add Score Increment Here---
                 if (Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol - 1] == '*')
                 {
-                    Score += 10; //Adds 10
+                    Gameplay.GridOfMap.GetScore += 10; //Adds 10
                 }
                 else if (Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol - 1] == 'o')
                 {
-                    Score += 50; //Adds 50
+                    Gameplay.GridOfMap.GetScore += 50; //Adds 50
                 }
 
                 Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol - 1] = ','; //Eat a dot
@@ -185,11 +199,11 @@ namespace Pac_Man
                 //---Add Score Increment Here---
                 if (Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol + 1] == '*')
                 {
-                    Score += 10; //Adds 10
+                    Gameplay.GridOfMap.GetScore += 10; //Adds 10
                 }
                 else if (Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol + 1] == 'o')
                 {
-                    Score += 50; //Adds 50
+                    Gameplay.GridOfMap.GetScore += 50; //Adds 50
                 }
 
 
@@ -320,6 +334,8 @@ namespace Pac_Man
             }
 
             #endregion
+
+            
 
         }
 
