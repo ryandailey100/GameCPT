@@ -35,6 +35,7 @@
             this.lbl_Score = new System.Windows.Forms.Label();
             this.lbl_Lives = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lbl_GameOver = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TimerUpdate
@@ -44,7 +45,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(572, 35);
+            this.button1.Location = new System.Drawing.Point(474, 35);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 51);
             this.button1.TabIndex = 0;
@@ -96,12 +97,26 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Lives:";
             // 
+            // lbl_GameOver
+            // 
+            this.lbl_GameOver.AutoSize = true;
+            this.lbl_GameOver.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_GameOver.Font = new System.Drawing.Font("Impact", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_GameOver.ForeColor = System.Drawing.Color.Red;
+            this.lbl_GameOver.Location = new System.Drawing.Point(245, 285);
+            this.lbl_GameOver.Name = "lbl_GameOver";
+            this.lbl_GameOver.Size = new System.Drawing.Size(504, 117);
+            this.lbl_GameOver.TabIndex = 5;
+            this.lbl_GameOver.Text = "Game Over!";
+            this.lbl_GameOver.Visible = false;
+            // 
             // Gameplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(884, 626);
+            this.Controls.Add(this.lbl_GameOver);
             this.Controls.Add(this.lbl_Lives);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbl_Score);
@@ -109,8 +124,10 @@
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "Gameplay";
             this.Text = "NOT Pac-Man";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Gameplay_FormClosed);
             this.Load += new System.EventHandler(this.Gameplay_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gameplay_KeyDown);
             this.ResumeLayout(false);
@@ -125,5 +142,6 @@
         private System.Windows.Forms.Label lbl_Score;
         private System.Windows.Forms.Label lbl_Lives;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_GameOver;
     }
 }

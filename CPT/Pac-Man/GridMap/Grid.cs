@@ -35,6 +35,31 @@ namespace GridMap
         bool GreenVulnerable = true;
         bool OrangeVulnerable = true;
 
+        //Red Ghost Position (for the green ghost)
+        int RedGhostRow = 0;
+        int RedGhostCol = 0;
+
+        bool GameOver = false; //if its true, game ends
+
+        
+        public bool GetGameOver
+        {
+            get { return GameOver; }
+            set { GameOver = value; }
+        }
+
+        public int GetRedGhostrow
+        {
+            get { return RedGhostRow; }
+            set { RedGhostRow = value; }
+        }
+
+        public int GetRedGhostcol
+        {
+            get { return RedGhostCol; }
+            set { RedGhostCol = value; }
+        }
+
         public bool GetRedVul
         {
             set { RedVulnerable = value; }
@@ -241,6 +266,20 @@ namespace GridMap
 
                 }
             }
+        }
+
+        public bool CheckDotsComplete()
+        {
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    if (Dots[r, c] == '*')
+                        return false;
+                }
+            }
+
+            return true;
         }
 
         //constructor

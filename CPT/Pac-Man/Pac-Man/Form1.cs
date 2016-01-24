@@ -131,6 +131,10 @@ namespace Pac_Man
             pic_Arrow.Visible = !pic_Arrow.Visible;
         }
 
-
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Application.OpenForms.Count == 0)
+                Application.Exit();
+        }
     }
 }
