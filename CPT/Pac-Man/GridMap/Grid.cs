@@ -77,6 +77,41 @@ namespace GridMap
             set { cols = value; }
         }
 
+        public void PaintGrid()
+        {
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    #region Map
+                    //change colour of cell depending on what is in it
+                    if (Maze[r, c] == '#')
+                        GetCell(r, c).BackgroundColor = Color.Blue;
+                    else if (Maze[r, c] == '.')
+                        GetCell(r, c).BackgroundColor = Color.Black;
+                    else if (Maze[r, c] == ',')
+                        GetCell(r, c).BackgroundColor = Color.Black;
+                    else if (Maze[r, c] == '&')
+                        GetCell(r, c).BackgroundColor = Color.Black;
+                    else if (Maze[r, c] == 'o')
+                        GetCell(r, c).BackgroundColor = Color.Black;
+                    else if (Maze[r, c] == '=')
+                        GetCell(r, c).BackgroundColor = Color.Black;
+                    else if (Maze[r, c] == 'S')
+                        GetCell(r, c).BackgroundColor = Color.Yellow;
+                    else if (Maze[r, c] == 'R')
+                        GetCell(r, c).BackgroundColor = Color.Red;
+                    else if (Maze[r, c] == 'P')
+                        GetCell(r, c).BackgroundColor = Color.Pink;
+                    else if (Maze[r, c] == 'G')
+                        GetCell(r, c).BackgroundColor = Color.Cyan;
+                    else if (Maze[r, c] == 'O')
+                        GetCell(r, c).BackgroundColor = Color.Orange;
+                    #endregion
+
+                }
+            }
+        }
 
         //constructor
         public Grid(int Rows, int Columns, int CellSize)

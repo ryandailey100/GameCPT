@@ -104,8 +104,6 @@ namespace Pac_Man
         }
 
        
-
-
         public void UpdatePlayer()
         {
             //---Movement & Score---

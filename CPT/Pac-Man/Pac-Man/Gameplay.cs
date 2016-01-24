@@ -164,44 +164,9 @@ namespace Pac_Man
             //OrangeGhost.UpdateAI();
             
 
-
-            //Paint grid <---Add this into the grid class------------<-----------<--------<--------<-----<<<<<<----<<<---
-            #region Paint Grid
-            for (int r = 0; r < GridOfMap.GetRows; r++)
-            {
-                for (int c = 0; c < GridOfMap.GetCols; c++)
-                {
-                    #region Map
-                    //change colour of cell depending on what is in it
-                    if (GridOfMap.GetMaze[r, c] == '#')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Blue;
-                    else if (GridOfMap.GetMaze[r, c] == '.')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (GridOfMap.GetMaze[r, c] == ',')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (GridOfMap.GetMaze[r, c] == '&')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (GridOfMap.GetMaze[r, c] == 'o')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (GridOfMap.GetMaze[r, c] == '=')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Black;
-                    else if (GridOfMap.GetMaze[r, c] == 'S')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Yellow;
-                    else if (GridOfMap.GetMaze[r, c] == 'R')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Red;
-                    else if (GridOfMap.GetMaze[r, c] == 'P')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Pink;
-                    else if (GridOfMap.GetMaze[r, c] == 'G')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Cyan;
-                    else if (GridOfMap.GetMaze[r, c] == 'O')
-                        GridOfMap.GetCell(r, c).BackgroundColor = Color.Orange;
-                    #endregion
-
-                }
-            }
-
+            //Paint grid 
+            GridOfMap.PaintGrid();
             this.Refresh();
-            #endregion
             
 
             //Update label
@@ -209,6 +174,7 @@ namespace Pac_Man
             lbl_Lives.Text = GridOfMap.GetLives.ToString();
 
         }
+
 
         public static void ResetObjects()
         {
@@ -220,11 +186,14 @@ namespace Pac_Man
             PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
             //GreenGhost = new GhostAI(GhostAI.Ghost.Green);
             //OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
+
+            
         }
 
+      
         public static void GameOver()
         {
-
+            
         }
 
 
