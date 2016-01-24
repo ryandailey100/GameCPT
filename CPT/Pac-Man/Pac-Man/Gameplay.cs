@@ -136,6 +136,8 @@ namespace Pac_Man
                 this.Width = GridOfMap.GetCols * 20 + 40;
                 this.Height = GridOfMap.GetRows * 20 + 100;
 
+               
+
                 //tell form to redraw
                 this.Refresh();
 

@@ -140,6 +140,10 @@ namespace Pac_Man
                     Gameplay.GridOfMap.GetScore += 50; //Adds 50
                     Gameplay.GridOfMap.GetPowerUp = true;
                     Gameplay.GridOfMap.GetPowerTimer = 55;
+                    Gameplay.GridOfMap.GetRedVul = true;
+                    Gameplay.GridOfMap.GetPinkVul = true;
+                    Gameplay.GridOfMap.GetGreenVul = true;
+                    Gameplay.GridOfMap.GetOrangeVul = true;
                 }
 
                 Gameplay.GridOfMap.GetDots[PlayerRow - 1, PlayerCol] = ','; //Eat a dot
@@ -163,6 +167,10 @@ namespace Pac_Man
                     Gameplay.GridOfMap.GetScore += 50; //Adds 50
                     Gameplay.GridOfMap.GetPowerUp = true;
                     Gameplay.GridOfMap.GetPowerTimer = 55;
+                    Gameplay.GridOfMap.GetRedVul = true;
+                    Gameplay.GridOfMap.GetPinkVul = true;
+                    Gameplay.GridOfMap.GetGreenVul = true;
+                    Gameplay.GridOfMap.GetOrangeVul = true;
                 }
 
 
@@ -186,6 +194,10 @@ namespace Pac_Man
                     Gameplay.GridOfMap.GetScore += 50; //Adds 50
                     Gameplay.GridOfMap.GetPowerUp = true;
                     Gameplay.GridOfMap.GetPowerTimer = 55;
+                    Gameplay.GridOfMap.GetRedVul = true;
+                    Gameplay.GridOfMap.GetPinkVul = true;
+                    Gameplay.GridOfMap.GetGreenVul = true;
+                    Gameplay.GridOfMap.GetOrangeVul = true;
                 }
 
                 Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol - 1] = ','; //Eat a dot
@@ -208,6 +220,10 @@ namespace Pac_Man
                     Gameplay.GridOfMap.GetScore += 50; //Adds 50
                     Gameplay.GridOfMap.GetPowerUp = true;
                     Gameplay.GridOfMap.GetPowerTimer = 55;
+                    Gameplay.GridOfMap.GetRedVul = true;
+                    Gameplay.GridOfMap.GetPinkVul = true;
+                    Gameplay.GridOfMap.GetGreenVul = true;
+                    Gameplay.GridOfMap.GetOrangeVul = true;
                 }
 
 

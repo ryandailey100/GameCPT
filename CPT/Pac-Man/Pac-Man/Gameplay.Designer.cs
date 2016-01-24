@@ -56,6 +56,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(254, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 42);
@@ -66,6 +67,7 @@
             // 
             this.lbl_Score.AutoSize = true;
             this.lbl_Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Score.ForeColor = System.Drawing.Color.White;
             this.lbl_Score.Location = new System.Drawing.Point(381, 44);
             this.lbl_Score.Name = "lbl_Score";
             this.lbl_Score.Size = new System.Drawing.Size(40, 42);
@@ -76,6 +78,7 @@
             // 
             this.lbl_Lives.AutoSize = true;
             this.lbl_Lives.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Lives.ForeColor = System.Drawing.Color.White;
             this.lbl_Lives.Location = new System.Drawing.Point(138, 44);
             this.lbl_Lives.Name = "lbl_Lives";
             this.lbl_Lives.Size = new System.Drawing.Size(40, 42);
@@ -86,6 +89,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(21, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(122, 42);
@@ -96,6 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(884, 626);
             this.Controls.Add(this.lbl_Lives);
             this.Controls.Add(this.label4);
@@ -105,7 +110,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.Name = "Gameplay";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NOT Pac-Man";
             this.Load += new System.EventHandler(this.Gameplay_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gameplay_KeyDown);
