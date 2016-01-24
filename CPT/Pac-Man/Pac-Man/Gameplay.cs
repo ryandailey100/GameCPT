@@ -110,7 +110,7 @@ namespace Pac_Man
                 {
                     for (int c = 0; c < cols; c++)
                     {
-                        if (GridOfMap.GetMaze[r, c] == '.' || GridOfMap.GetMaze[r, c] == '+')
+                        if (GridOfMap.GetMaze[r, c] == '.')
                             GridOfMap.GetDots[r, c] = '*';
                         else
                             GridOfMap.GetDots[r, c] = GridOfMap.GetMaze[r, c];
@@ -124,8 +124,8 @@ namespace Pac_Man
                 //Create All 4 Ghost AI's
                 RedGhost = new GhostAI(GhostAI.Ghost.Red);
                 PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
-                //GreenGhost = new GhostAI(GhostAI.Ghost.Green);
-                //OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
+                GreenGhost = new GhostAI(GhostAI.Ghost.Green);
+                OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
 
 
 
@@ -161,9 +161,9 @@ namespace Pac_Man
             //Pink Ghost
             PinkGhost.UpdateAI();
             //Green Ghost
-            //GreenGhost.UpdateAI();
+            GreenGhost.UpdateAI();
             //Orange Ghost
-            //OrangeGhost.UpdateAI();
+            OrangeGhost.UpdateAI();
             
             //Power Up Timer
             if (GridOfMap.GetPowerUp == true)
@@ -182,6 +182,7 @@ namespace Pac_Man
                     
             }
 
+            
             //Paint grid 
             GridOfMap.PaintGrid();
             this.Refresh();
@@ -190,6 +191,47 @@ namespace Pac_Man
             //Update label
             lbl_Score.Text = GridOfMap.GetScore.ToString();
             lbl_Lives.Text = GridOfMap.GetLives.ToString();
+
+            //Check if all dots are gone
+            #region Check Dots
+            if (GridOfMap.CheckDotsComplete() == true)
+            {
+                
+                //Input all dots
+                for (int r = 0; r < GridOfMap.GetRows; r++)
+                {
+                    for (int c = 0; c < GridOfMap.GetCols; c++)
+                    {
+                        if (GridOfMap.GetOriginalMaze[r, c] == '.')
+                            GridOfMap.GetDots[r, c] = '*';
+                        else
+                            GridOfMap.GetDots[r, c] = GridOfMap.GetOriginalMaze[r, c];
+                    }
+                }
+                Gameplay.GridOfMap.GetPowerUp = false;
+                Gameplay.GridOfMap.GetRedVul = true;
+                Gameplay.GridOfMap.GetPinkVul = true;
+                Gameplay.GridOfMap.GetGreenVul = true;
+                Gameplay.GridOfMap.GetOrangeVul = true;
+
+                //Spawn everything back to normal
+                for (int r = 0; r < Gameplay.GridOfMap.GetRows; r++)
+                {
+                    for (int c = 0; c < Gameplay.GridOfMap.GetCols; c++)
+                    {
+                        Gameplay.GridOfMap.GetMaze[r, c] = Gameplay.GridOfMap.GetOriginalMaze[r, c];
+                    }
+                }
+
+                //Reset game while keeping score and lives
+                ResetObjects();
+
+            }
+            #endregion
+
+            //Check for Game Over
+            if (GridOfMap.GetGameOver == true)
+                GameOver();
 
         }
 
@@ -202,8 +244,8 @@ namespace Pac_Man
             //Ghosts
             RedGhost = new GhostAI(GhostAI.Ghost.Red);
             PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
-            //GreenGhost = new GhostAI(GhostAI.Ghost.Green);
-            //OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
+            GreenGhost = new GhostAI(GhostAI.Ghost.Green);
+            OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
 
             
         }
@@ -213,7 +255,7 @@ namespace Pac_Man
             GridOfMap.GetMaze[RedGhost.GetInitialRow, RedGhost.GetInitialCol] = 'R';
             Gameplay.GridOfMap.GetRedVul = false;
             RedGhost = new GhostAI(GhostAI.Ghost.Red);
-            RedGhost.TimeInCage = 5;
+            RedGhost.TimeInCage = 20;
         }
 
         public static void PinkGhostDeath()
@@ -221,7 +263,7 @@ namespace Pac_Man
             GridOfMap.GetMaze[PinkGhost.GetInitialRow, PinkGhost.GetInitialCol] = 'P';
             Gameplay.GridOfMap.GetPinkVul = false;
             PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
-            PinkGhost.TimeInCage = 5;
+            PinkGhost.TimeInCage = 20;
         }
 
         public static void GreenGhostDeath()
@@ -229,7 +271,7 @@ namespace Pac_Man
             GridOfMap.GetMaze[GreenGhost.GetInitialRow, GreenGhost.GetInitialCol] = 'G';
             Gameplay.GridOfMap.GetGreenVul = false;
             GreenGhost = new GhostAI(GhostAI.Ghost.Green);
-            GreenGhost.TimeInCage = 5;
+            GreenGhost.TimeInCage = 20;
         }
 
         public static void OrangeGhostDeath()
@@ -237,14 +279,47 @@ namespace Pac_Man
             GridOfMap.GetMaze[OrangeGhost.GetInitialRow, OrangeGhost.GetInitialCol] = 'O';
             Gameplay.GridOfMap.GetOrangeVul = false;
             OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
-            OrangeGhost.TimeInCage = 5;
+            OrangeGhost.TimeInCage = 20;
         }
 
-        public static void GameOver()
+        public void GameOver()
         {
-            
+            TimerUpdate.Stop();
+            //Delete pac-man and ghosts from maze, so when the tiles gets painted, they are not there
+            for (int r = 0; r < GridOfMap.GetRows; r++)
+            {
+                for (int c = 0; c < GridOfMap.GetCols; c++)
+                {
+                    if (GridOfMap.GetMaze[r, c] == 'S' || GridOfMap.GetMaze[r, c] == 'R' || GridOfMap.GetMaze[r, c] == 'P' || GridOfMap.GetMaze[r, c] == 'G' || GridOfMap.GetMaze[r, c] == 'O')
+                        GridOfMap.GetMaze[r, c] = '.';
+                }
+            }
+
+
+            //Paint grid 
+            GridOfMap.PaintGrid();
+            this.Refresh();
+
+            //Show Game Over Label
+            lbl_GameOver.Location = new Point(this.Height / 4, this.Width / 2);
+            lbl_GameOver.Visible = true;
+            this.Refresh();
+
+            //Delay 3 seconds before returning to highscore menu
+            System.Threading.Thread.Sleep(3000);
+
+            //Opens up main menu form
+            Form1 MainForm = new Form1();
+            MainForm.Show();
+
+            this.Close();
+
         }
 
-
+        private void Gameplay_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Application.OpenForms.Count == 0)
+                Application.Exit();
+        }
     }
 }

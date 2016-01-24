@@ -18,6 +18,7 @@ namespace Pac_Man
 
         bool InCage = true; //Starts in ghost cage
         public int TimeInCage;
+        GhostMovement Prev_Dir = GhostMovement.Left;
 
         GhostMovement Dir_Ghost = GhostMovement.Left;
 
@@ -43,22 +44,22 @@ namespace Pac_Man
             if (GhostType == Ghost.Red)
             {
                 GhostSymbol = 'R';
-                TimeInCage = 0; //Comes out right away
+                TimeInCage = 0; //Comes out right away //0 frames
             }
             else if (GhostType == Ghost.Pink)
             {
                 GhostSymbol = 'P';
-                TimeInCage = 25; //Comes out after around 4 seconds (1000 * 150 / 4), since the timer runs at 150ms)
+                TimeInCage = 25; //Comes out after around 4 seconds (1000 * 150 / 4), since the timer runs at 150ms) //25 frames
             }
             else if (GhostType == Ghost.Green)
             {
                 GhostSymbol = 'G';
-                TimeInCage = 50; //Comes out after around 4 seconds (1000 * 150 / 4), since the timer runs at 150ms)
+                TimeInCage = 50; //Comes out after around 4 seconds (1000 * 150 / 4), since the timer runs at 150ms) //50 frames
             }
             else if (GhostType == Ghost.Orange)
             {
                 GhostSymbol = 'O';
-                TimeInCage = 80; //Comes out after around 4 seconds (1000 * 150 / 4), since the timer runs at 150ms)
+                TimeInCage = 80; //Comes out after around 4 seconds (1000 * 150 / 4), since the timer runs at 150ms) //80 frames
             }
                 
 
@@ -125,23 +126,43 @@ namespace Pac_Man
             }
             else
             {
+                if (CheckForCollision() == true) return; //Exit Function
+
                 //If ghost is eatable (runs away from you)
-                if (Gameplay.GridOfMap.GetPowerUp == true && ((GhostType == Ghost.Red && Gameplay.GridOfMap.GetRedVul == true) || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true) || (GhostType == Ghost.Green && Gameplay.GridOfMap.GetGreenVul == true) || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true))) //Run away from pacman
+                if (Gameplay.GridOfMap.GetPowerUp == true && ((GhostType == Ghost.Red && Gameplay.GridOfMap.GetRedVul == true) || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true) || (GhostType == Ghost.Green && Gameplay.GridOfMap.GetGreenVul == true) || (GhostType == Ghost.Orange && Gameplay.GridOfMap.GetOrangeVul == true))) //Run away from pacman
                 {
+                    #region Ghost Is Eatable
+                    //Sets Prev_Dir
+                    if (Dir_Ghost != GhostMovement.Nil)
+                        Prev_Dir = Dir_Ghost;
+
                     if (Gameplay.GridOfMap.GetPowerTimer % 2 == 0) //Happens only every even number (every other frame). This slows down the ghost
                     {
                         //When ghosts hits an intersection
-                        if (((Dir_Ghost == GhostMovement.Up || Dir_Ghost == GhostMovement.Down) && (Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == '.' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == '.' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == ',' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == ',' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'o' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'o' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'S' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'S' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'R' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'R' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'P' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'P' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'G' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'G' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'O' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'O')) || ((Dir_Ghost == GhostMovement.Left || Dir_Ghost == GhostMovement.Right) && (Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == '.' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == '.' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == ',' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == ',' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'o' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'o' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'S' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'S' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'R' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'R' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'P' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'P' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'G' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'G' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'O' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'O'))) //When up or down, check left and right. Or when left or right, check up and down. Then, find a new path to Pac-Man
+                        if (((Prev_Dir == GhostMovement.Up || Prev_Dir == GhostMovement.Down) && (Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == '.' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == '.' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == ',' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == ',' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'o' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'o' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'S' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'S' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'R' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'R' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'P' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'P' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'G' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'G' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position - 1] == 'O' || Gameplay.GridOfMap.GetMaze[row_Position, col_Position + 1] == 'O')) || ((Prev_Dir == GhostMovement.Left || Prev_Dir == GhostMovement.Right) && (Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == '.' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == '.' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == ',' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == ',' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'o' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'o' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'S' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'S' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'R' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'R' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'P' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'P' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'G' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'G' || Gameplay.GridOfMap.GetMaze[row_Position - 1, col_Position] == 'O' || Gameplay.GridOfMap.GetMaze[row_Position + 1, col_Position] == 'O'))) //When up or down, check left and right. Or when left or right, check up and down. Then, find a new path to Pac-Man
                         {
-
+                            if (Prev_Dir != GhostMovement.Down && (Gameplay.GridOfMap.GetOriginalMaze[row_Position - 1, col_Position] == '.' || Gameplay.GridOfMap.GetOriginalMaze[row_Position - 1, col_Position] == ',' || Gameplay.GridOfMap.GetOriginalMaze[row_Position - 1, col_Position] == 'o' || Gameplay.GridOfMap.GetOriginalMaze[row_Position - 1, col_Position] == 'S'))
+                                Dir_Ghost = GhostMovement.Up;
+                            else if (Prev_Dir != GhostMovement.Up && (Gameplay.GridOfMap.GetOriginalMaze[row_Position + 1, col_Position] == '.' || Gameplay.GridOfMap.GetOriginalMaze[row_Position + 1, col_Position] == ',' || Gameplay.GridOfMap.GetOriginalMaze[row_Position + 1, col_Position] == 'o' || Gameplay.GridOfMap.GetOriginalMaze[row_Position + 1, col_Position] == 'S'))
+                                Dir_Ghost = GhostMovement.Down;
+                            else if (Prev_Dir != GhostMovement.Right && (Gameplay.GridOfMap.GetOriginalMaze[row_Position, col_Position - 1] == '.' || Gameplay.GridOfMap.GetOriginalMaze[row_Position, col_Position - 1] == ',' || Gameplay.GridOfMap.GetOriginalMaze[row_Position, col_Position - 1] == 'o' || Gameplay.GridOfMap.GetOriginalMaze[row_Position, col_Position - 1] == 'S'))
+                                Dir_Ghost = GhostMovement.Left;
+                            else if (Prev_Dir != GhostMovement.Left && (Gameplay.GridOfMap.GetOriginalMaze[row_Position, col_Position + 1] == '.' || Gameplay.GridOfMap.GetOriginalMaze[row_Position, col_Position + 1] == ',' || Gameplay.GridOfMap.GetOriginalMaze[row_Position, col_Position + 1] == 'o' || Gameplay.GridOfMap.GetOriginalMaze[row_Position, col_Position + 1] == 'S'))
+                                Dir_Ghost = GhostMovement.Right;
+                        }
+                        else
+                        {
+                            Dir_Ghost = Prev_Dir;
                         }
                     }
+                    else
+                    {
+                        Dir_Ghost = GhostMovement.Nil;
+                    }
+                    #endregion
                 }
                 else  //Regular Movements
                 {
-                    //Check for death
-                    if (CheckForCollision() == true) return; //Exit Function
-
                     //Find Direction (if needed)
                     #region Find Direction
                     //If Ghost hits a intersection, then find path to pacman. Else, continue moving in direction (Dir_Ghost)
@@ -224,17 +245,118 @@ namespace Pac_Man
                         }
                         else if (GhostType == Ghost.Green)
                         {
-                            #region Green Ghost
+                            #region Green Ghost : //To complex to explain, search on google
 
+                            //rise over run
+                            //rise = y2-y1
+                            //run = x2-x1
+                            //Point_row = 2 * rise
+                            //Point_col = 2 * run
 
+                            if (Gameplay.PlayerClass.GetPlayerDir == Player.PlayerMovement.Up)
+                            {
+                                Point_row = Gameplay.GridOfMap.GetRedGhostrow + 2 * (Gameplay.GridOfMap.GetRedGhostrow - 2 - Gameplay.PlayerClass.GetPlayerRow);
+                                Point_col = Gameplay.GridOfMap.GetRedGhostcol + 2 * (Gameplay.GridOfMap.GetRedGhostcol - Gameplay.PlayerClass.GetPlayerCol);
+
+                                //Check for out of bounds
+                                if (Point_row <= 0)
+                                    Point_row = 1;
+                                else if (Point_row > Gameplay.GridOfMap.GetRows)
+                                    Point_row = Gameplay.GridOfMap.GetRows;
+
+                                if (Point_col <= 0)
+                                    Point_col = 1;
+                                else if (Point_col > Gameplay.GridOfMap.GetCols)
+                                    Point_col = Gameplay.GridOfMap.GetCols;
+
+                            }
+                            else if (Gameplay.PlayerClass.GetPlayerDir == Player.PlayerMovement.Down)
+                            {
+                                Point_row = Gameplay.GridOfMap.GetRedGhostrow + 2 * (Gameplay.GridOfMap.GetRedGhostrow + 2 - Gameplay.PlayerClass.GetPlayerRow);
+                                Point_col = Gameplay.GridOfMap.GetRedGhostcol + 2 * (Gameplay.GridOfMap.GetRedGhostcol - Gameplay.PlayerClass.GetPlayerCol);
+
+                                //Check for out of bounds
+                                if (Point_row <= 0)
+                                    Point_row = 1;
+                                else if (Point_row > Gameplay.GridOfMap.GetRows)
+                                    Point_row = Gameplay.GridOfMap.GetRows;
+
+                                if (Point_col <= 0)
+                                    Point_col = 1;
+                                else if (Point_col > Gameplay.GridOfMap.GetCols)
+                                    Point_col = Gameplay.GridOfMap.GetCols;
+
+                            }
+                            else if (Gameplay.PlayerClass.GetPlayerDir == Player.PlayerMovement.Left)
+                            {
+                                Point_row = Gameplay.GridOfMap.GetRedGhostrow + 2 * (Gameplay.GridOfMap.GetRedGhostrow - Gameplay.PlayerClass.GetPlayerRow);
+                                Point_col = Gameplay.GridOfMap.GetRedGhostcol + 2 * (Gameplay.GridOfMap.GetRedGhostcol - 2 - Gameplay.PlayerClass.GetPlayerCol);
+
+                                //Check for out of bounds
+                                if (Point_row <= 0)
+                                    Point_row = 1;
+                                else if (Point_row > Gameplay.GridOfMap.GetRows)
+                                    Point_row = Gameplay.GridOfMap.GetRows;
+
+                                if (Point_col <= 0)
+                                    Point_col = 1;
+                                else if (Point_col > Gameplay.GridOfMap.GetCols)
+                                    Point_col = Gameplay.GridOfMap.GetCols;
+
+                            }
+                            else if (Gameplay.PlayerClass.GetPlayerDir == Player.PlayerMovement.Right)
+                            {
+                                Point_row = Gameplay.GridOfMap.GetRedGhostrow + 2 * (Gameplay.GridOfMap.GetRedGhostrow - Gameplay.PlayerClass.GetPlayerRow);
+                                Point_col = Gameplay.GridOfMap.GetRedGhostcol + 2 * (Gameplay.GridOfMap.GetRedGhostcol + 2 - Gameplay.PlayerClass.GetPlayerCol);
+
+                                //Check for out of bounds
+                                if (Point_row <= 0)
+                                    Point_row = 1;
+                                else if (Point_row > Gameplay.GridOfMap.GetRows)
+                                    Point_row = Gameplay.GridOfMap.GetRows;
+
+                                if (Point_col <= 0)
+                                    Point_col = 1;
+                                else if (Point_col > Gameplay.GridOfMap.GetCols)
+                                    Point_col = Gameplay.GridOfMap.GetCols;
+
+                            }
+                            
 
                             #endregion
                         }
                         else if (GhostType == Ghost.Orange)
                         {
-                            #region Orange Ghost
+                            #region Orange Ghost : //Target is the bottom left of the map when in a 8 block radius from Pac-Man
 
+                            if (Math.Abs(Math.Sqrt(Math.Pow(row_Position - Gameplay.PlayerClass.GetPlayerRow, 2) + Math.Pow(col_Position - Gameplay.PlayerClass.GetPlayerCol, 2))) <= 8) //Point to Pac-Man
+                            {
+                                Point_row = Gameplay.PlayerClass.GetPlayerRow;
+                                Point_col = Gameplay.PlayerClass.GetPlayerCol;
+                            }
+                            else //Point to bottom left of the map
+                            {
+                                //Find block in the path that is closest to the bottom left corner
+                                for (int r = Gameplay.GridOfMap.GetRows - 1; r > 0; r--)
+                                {
+                                    for (int c = 0; c < Gameplay.GridOfMap.GetCols / 4; c++) //First quarter of the cols
+                                    {
+                                        if (Gameplay.GridOfMap.GetOriginalMaze[r, c] == '.' || Gameplay.GridOfMap.GetOriginalMaze[r, c] == ',')
+                                        {
+                                            Point_row = r;
+                                            Point_col = c;
 
+                                            //Break loop
+                                            r = 0;
+                                            break;
+                                        }
+
+                                    }
+
+                                }
+
+                                      
+                            }
 
 
                             #endregion
@@ -400,6 +522,11 @@ namespace Pac_Man
                 CheckForCollision();
             }
 
+            if (GhostType == Ghost.Red)
+            {
+                Gameplay.GridOfMap.GetRedGhostrow = row_Position;
+                Gameplay.GridOfMap.GetRedGhostcol = col_Position;
+            }
            
 
         }
@@ -436,13 +563,13 @@ namespace Pac_Man
                     return GhostMovement.Left;
                 else
                 {
-                    if ((row_Position < RowPoint && Dir_Ghost == GhostMovement.Down) || (row_Position > RowPoint && Dir_Ghost == GhostMovement.Up))
+                    if ((row_Position < RowPoint && Dir_Ghost == GhostMovement.Right) || (row_Position > RowPoint && Dir_Ghost == GhostMovement.Right))
                     {
                         return Dir_Ghost;
                     }
                     else
                     {
-                        return GhostMovement.Left;
+                        //return GhostMovement.Left;
                     }
                 }
             }
@@ -542,8 +669,10 @@ namespace Pac_Man
             
             if (row_Position == Gameplay.PlayerClass.GetPlayerRow && col_Position == Gameplay.PlayerClass.GetPlayerCol)
             {
-                if (Gameplay.GridOfMap.GetPowerUp == true && (GhostType == Ghost.Red && Gameplay.GridOfMap.GetRedVul == true) || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true) || (GhostType == Ghost.Green && Gameplay.GridOfMap.GetGreenVul == true) || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true)) //Run away from pacman
+                if (Gameplay.GridOfMap.GetPowerUp == true && (GhostType == Ghost.Red && Gameplay.GridOfMap.GetRedVul == true || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true) || (GhostType == Ghost.Green && Gameplay.GridOfMap.GetGreenVul == true) || (GhostType == Ghost.Orange && Gameplay.GridOfMap.GetOrangeVul == true))) //Run away from pacman
                 {
+                    //Pac-Man eats ghost
+                    Gameplay.GridOfMap.GetScore += 200;
                     Gameplay.GridOfMap.GetMaze[row_Position, col_Position] = '.'; ;
                     //Reset Ghost
                     if (GhostType == Ghost.Red)
@@ -552,17 +681,20 @@ namespace Pac_Man
                         Gameplay.PinkGhostDeath();
                     else if (GhostType == Ghost.Green)
                         Gameplay.GreenGhostDeath();
-                    else if (GhostType == Ghost.Pink)
-                        Gameplay.PinkGhostDeath();
+                    else if (GhostType == Ghost.Orange)
+                        Gameplay.OrangeGhostDeath();
 
                     return true;
                 }
                 else
                 {
+                    //Ghost eats Pac-Man
                     if (Gameplay.GridOfMap.GetLives <= 0)
                     {
                         //Game Over
-                        Gameplay.GameOver();
+                        Gameplay.GridOfMap.GetGameOver = true;
+                        
+                        return true;
                     }
                     else
                     {

@@ -40,9 +40,10 @@
             // pic_Arrow
             // 
             this.pic_Arrow.Image = global::Pac_Man.Resource1.Menu___Arrow;
-            this.pic_Arrow.Location = new System.Drawing.Point(777, 78);
+            this.pic_Arrow.Location = new System.Drawing.Point(1554, 150);
+            this.pic_Arrow.Margin = new System.Windows.Forms.Padding(6);
             this.pic_Arrow.Name = "pic_Arrow";
-            this.pic_Arrow.Size = new System.Drawing.Size(26, 33);
+            this.pic_Arrow.Size = new System.Drawing.Size(52, 63);
             this.pic_Arrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_Arrow.TabIndex = 0;
             this.pic_Arrow.TabStop = false;
@@ -58,9 +59,10 @@
             this.lblOn.BackColor = System.Drawing.Color.Transparent;
             this.lblOn.Font = new System.Drawing.Font("Courier New", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOn.ForeColor = System.Drawing.Color.Maroon;
-            this.lblOn.Location = new System.Drawing.Point(754, 42);
+            this.lblOn.Location = new System.Drawing.Point(1508, 81);
+            this.lblOn.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblOn.Name = "lblOn";
-            this.lblOn.Size = new System.Drawing.Size(49, 33);
+            this.lblOn.Size = new System.Drawing.Size(98, 64);
             this.lblOn.TabIndex = 1;
             this.lblOn.Text = "On";
             this.lblOn.Visible = false;
@@ -71,9 +73,10 @@
             this.lblOff.BackColor = System.Drawing.Color.Transparent;
             this.lblOff.Font = new System.Drawing.Font("Courier New", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOff.ForeColor = System.Drawing.Color.White;
-            this.lblOff.Location = new System.Drawing.Point(737, 9);
+            this.lblOff.Location = new System.Drawing.Point(1474, 17);
+            this.lblOff.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblOff.Name = "lblOff";
-            this.lblOff.Size = new System.Drawing.Size(66, 33);
+            this.lblOff.Size = new System.Drawing.Size(133, 64);
             this.lblOff.TabIndex = 2;
             this.lblOff.Text = "Off";
             this.lblOff.Visible = false;
@@ -82,28 +85,33 @@
             // 
             this.ListMaps.BackColor = System.Drawing.SystemColors.InfoText;
             this.ListMaps.FormattingEnabled = true;
-            this.ListMaps.Location = new System.Drawing.Point(93, 313);
+            this.ListMaps.ItemHeight = 25;
+            this.ListMaps.Location = new System.Drawing.Point(186, 602);
+            this.ListMaps.Margin = new System.Windows.Forms.Padding(6);
             this.ListMaps.Name = "ListMaps";
-            this.ListMaps.Size = new System.Drawing.Size(259, 238);
+            this.ListMaps.Size = new System.Drawing.Size(514, 454);
             this.ListMaps.TabIndex = 3;
             this.ListMaps.Visible = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Pac_Man.Resource1.Menu___Maps;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(815, 588);
+            this.ClientSize = new System.Drawing.Size(1630, 1131);
             this.Controls.Add(this.pic_Arrow);
             this.Controls.Add(this.ListMaps);
             this.Controls.Add(this.lblOff);
             this.Controls.Add(this.lblOn);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NOT Pac-Man";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Arrow)).EndInit();
