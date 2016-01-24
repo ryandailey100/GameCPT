@@ -8,7 +8,7 @@ namespace Pac_Man
 {
     public class GhostAI
     {
-        //Initial Location   <-----------Does not need this anymore
+        //Initial Location
         int Row_Initial = 0;
         int Col_Initial = 0;
 
@@ -17,7 +17,7 @@ namespace Pac_Man
         int col_Position = 0;
 
         bool InCage = true; //Starts in ghost cage
-        int TimeInCage;
+        public int TimeInCage;
 
         GhostMovement Dir_Ghost = GhostMovement.Left;
 
@@ -25,6 +25,15 @@ namespace Pac_Man
 
         char GhostSymbol = '.'; // the '.' is a placeholder
         
+        public int GetInitialRow
+        {
+            get { return Row_Initial; }
+        }
+
+        public int GetInitialCol
+        {
+            get { return Col_Initial; }
+        }
 
         public GhostAI(Ghost TypeGhost)
         {
@@ -93,7 +102,7 @@ namespace Pac_Man
 
         public void UpdateAI()
         {
-            if (InCage == true)
+            if (InCage == true) //In Ghost house/cage
             {
                 #region InCage Checks
                 if (TimeInCage == 0)
@@ -114,10 +123,19 @@ namespace Pac_Man
                 }
                 #endregion
             }
+            ////Check if powerup is enabled and your ghost is vulnerable
+            //else if (Gameplay.GridOfMap.GetPowerUp == true && (GhostType == Ghost.Red && Gameplay.GridOfMap.GetRedVul == true) || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true) || (GhostType == Ghost.Green && Gameplay.GridOfMap.GetGreenVul == true) || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true)) //Run away from pacman
+            //{
+            //    if (Gameplay.GridOfMap.GetPowerTimer % 2 == 0) //Happens only every even number (every other frame). This slows down the ghost
+            //    {
+
+            //    }
+            //}
+            //Regular Movements
             else
             {
                 //Check for death
-                if (CheckForDeath() == true) return; //Exit Function
+                if (CheckForCollision() == true) return; //Exit Function
 
                 //Find Direction (if needed)
                 #region Find Direction
@@ -375,7 +393,7 @@ namespace Pac_Man
 
 
                 //Check for death
-                CheckForDeath();
+                CheckForCollision();
             }
 
            
@@ -470,34 +488,49 @@ namespace Pac_Man
             return MazeCopy;
         }
 
-        private bool CheckForDeath()
+        private bool CheckForCollision()
         {
+            
             if (row_Position == Gameplay.PlayerClass.GetPlayerRow && col_Position == Gameplay.PlayerClass.GetPlayerCol)
             {
-                if (Gameplay.GridOfMap.GetLives <= 0)
+                if (Gameplay.GridOfMap.GetPowerUp == true && (GhostType == Ghost.Red && Gameplay.GridOfMap.GetRedVul == true) || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true) || (GhostType == Ghost.Green && Gameplay.GridOfMap.GetGreenVul == true) || (GhostType == Ghost.Pink && Gameplay.GridOfMap.GetPinkVul == true)) //Run away from pacman
                 {
-                    //Game Over
-                    Gameplay.GameOver();
+                    //Reset Ghost
+                    if (GhostType == Ghost.Red)
+                        Gameplay.RedGhostDeath();
+                    else if (GhostType == Ghost.Pink)
+                        Gameplay.PinkGhostDeath();
+                    else if (GhostType == Ghost.Green)
+                        Gameplay.GreenGhostDeath();
+                    else if (GhostType == Ghost.Pink)
+                        Gameplay.PinkGhostDeath();
                 }
                 else
                 {
-                    Gameplay.GridOfMap.SubtractLife();
-
-                    //Spawn everything back to normal
-                    for (int r = 0; r < Gameplay.GridOfMap.GetRows; r++)
+                    if (Gameplay.GridOfMap.GetLives <= 0)
                     {
-                        for (int c = 0; c < Gameplay.GridOfMap.GetCols; c++)
-                        {
-                            Gameplay.GridOfMap.GetMaze[r, c] = Gameplay.GridOfMap.GetOriginalMaze[r, c];
-                        }
+                        //Game Over
+                        Gameplay.GameOver();
                     }
+                    else
+                    {
+                        Gameplay.GridOfMap.SubtractLife();
 
-                    //reset all ghosts and player classes
-                    Gameplay.ResetObjects();
+                        //Spawn everything back to normal
+                        for (int r = 0; r < Gameplay.GridOfMap.GetRows; r++)
+                        {
+                            for (int c = 0; c < Gameplay.GridOfMap.GetCols; c++)
+                            {
+                                Gameplay.GridOfMap.GetMaze[r, c] = Gameplay.GridOfMap.GetOriginalMaze[r, c];
+                            }
+                        }
+
+                        //reset all ghosts and player classes
+                        Gameplay.ResetObjects();
+                    }
+                    return true;
                 }
-
-                return true;
-
+                
             }
             return false;
         }

@@ -163,6 +163,22 @@ namespace Pac_Man
             //Orange Ghost
             //OrangeGhost.UpdateAI();
             
+            //Power Up Timer
+            if (GridOfMap.GetPowerUp == true)
+            {
+                if (GridOfMap.GetPowerTimer > 0)
+                    GridOfMap.GetPowerTimer--;
+                else //End powerup
+                {
+                    //Reset
+                    GridOfMap.GetPowerUp = false;
+                    GridOfMap.GetRedVul = true;
+                    GridOfMap.GetPinkVul = true;
+                    GridOfMap.GetGreenVul = true;
+                    GridOfMap.GetOrangeVul = true;
+                }
+                    
+            }
 
             //Paint grid 
             GridOfMap.PaintGrid();
@@ -190,7 +206,38 @@ namespace Pac_Man
             
         }
 
-      
+        public static void RedGhostDeath()
+        {
+            GridOfMap.GetMaze[RedGhost.GetInitialRow, RedGhost.GetInitialCol] = 'R';
+            Gameplay.GridOfMap.GetRedVul = false;
+            RedGhost = new GhostAI(GhostAI.Ghost.Red);
+            RedGhost.TimeInCage = 5;
+        }
+
+        public static void PinkGhostDeath()
+        {
+            GridOfMap.GetMaze[PinkGhost.GetInitialRow, PinkGhost.GetInitialCol] = 'P';
+            Gameplay.GridOfMap.GetPinkVul = false;
+            PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
+            PinkGhost.TimeInCage = 5;
+        }
+
+        public static void GreenGhostDeath()
+        {
+            GridOfMap.GetMaze[GreenGhost.GetInitialRow, GreenGhost.GetInitialCol] = 'G';
+            Gameplay.GridOfMap.GetGreenVul = false;
+            GreenGhost = new GhostAI(GhostAI.Ghost.Green);
+            GreenGhost.TimeInCage = 5;
+        }
+
+        public static void OrangeGhostDeath()
+        {
+            GridOfMap.GetMaze[OrangeGhost.GetInitialRow, OrangeGhost.GetInitialCol] = 'O';
+            Gameplay.GridOfMap.GetOrangeVul = false;
+            OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
+            OrangeGhost.TimeInCage = 5;
+        }
+
         public static void GameOver()
         {
             

@@ -25,6 +25,52 @@ namespace GridMap
         private int Score = 0;
         private int Lives = 3;
 
+        //Special Dot Power Up
+        bool PowerUp = false;
+        int PowerTimer = 0;
+
+        //Ghosts Power up vulnerability
+        bool RedVulnerable = true;
+        bool PinkVulnerable = true;
+        bool GreenVulnerable = true;
+        bool OrangeVulnerable = true;
+
+        public bool GetRedVul
+        {
+            set { RedVulnerable = value; }
+            get { return RedVulnerable; }
+        }
+
+        public bool GetPinkVul
+        {
+            set { PinkVulnerable = value; }
+            get { return PinkVulnerable; }
+        }
+
+        public bool GetGreenVul
+        {
+            set { GreenVulnerable = value; }
+            get { return GreenVulnerable; }
+        }
+
+        public bool GetOrangeVul
+        {
+            set { OrangeVulnerable = value; }
+            get { return OrangeVulnerable; }
+        }
+
+        public bool GetPowerUp
+        {
+            get { return PowerUp; }
+            set { PowerUp = value; }
+        }
+
+        public int GetPowerTimer
+        {
+            get { return PowerTimer; }
+            set { PowerTimer = value; }
+        }
+
         public int GetScore
         {
             get { return Score; }
@@ -86,7 +132,7 @@ namespace GridMap
                     #region Map
                     //change colour of cell depending on what is in it
                     if (Maze[r, c] == '#')
-                        GetCell(r, c).BackgroundColor = Color.Blue;
+                        GetCell(r, c).BackgroundColor = Color.Navy;
                     else if (Maze[r, c] == '.')
                         GetCell(r, c).BackgroundColor = Color.Black;
                     else if (Maze[r, c] == ',')
@@ -100,13 +146,97 @@ namespace GridMap
                     else if (Maze[r, c] == 'S')
                         GetCell(r, c).BackgroundColor = Color.Yellow;
                     else if (Maze[r, c] == 'R')
-                        GetCell(r, c).BackgroundColor = Color.Red;
+                    {
+                        #region Red
+                        if (PowerUp == true && RedVulnerable == true)
+                        {
+                            if (PowerTimer < 15) //Start to blink blue and white (after 6 seconds passed, or down to the last 15 frames(approx last 2 seconds))
+                            {
+                                if (PowerTimer % 2 == 0)
+                                    GetCell(r, c).BackgroundColor = Color.Blue;
+                                else
+                                    GetCell(r, c).BackgroundColor = Color.White;
+                            }
+                            else
+                            {
+                                GetCell(r, c).BackgroundColor = Color.Blue;
+                            }
+                        }
+                        else
+                        {
+                            GetCell(r, c).BackgroundColor = Color.Red;
+                        }
+                        #endregion
+                    }
                     else if (Maze[r, c] == 'P')
-                        GetCell(r, c).BackgroundColor = Color.Pink;
+                    {
+                        #region Pink
+                        if (PowerUp == true && PinkVulnerable == true)
+                        {
+                            if (PowerTimer < 15) //Start to blink blue and white (after 6 seconds passed, or down to the last 15 frames(approx last 2 seconds))
+                            {
+                                if (PowerTimer % 2 == 0)
+                                    GetCell(r, c).BackgroundColor = Color.Blue;
+                                else
+                                    GetCell(r, c).BackgroundColor = Color.White;
+                            }
+                            else
+                            {
+                                GetCell(r, c).BackgroundColor = Color.Blue;
+                            }
+                        }
+                        else
+                        {
+                            GetCell(r, c).BackgroundColor = Color.Pink;
+                        }
+                        #endregion
+                    }
                     else if (Maze[r, c] == 'G')
-                        GetCell(r, c).BackgroundColor = Color.Cyan;
+                    {
+                        #region Green
+                        if (PowerUp == true && GreenVulnerable == true)
+                        {
+                            if (PowerTimer < 15) //Start to blink blue and white (after 6 seconds passed, or down to the last 15 frames(approx last 2 seconds))
+                            {
+                                if (PowerTimer % 2 == 0)
+                                    GetCell(r, c).BackgroundColor = Color.Blue;
+                                else
+                                    GetCell(r, c).BackgroundColor = Color.White;
+                            }
+                            else
+                            {
+                                GetCell(r, c).BackgroundColor = Color.Blue;
+                            }
+                        }
+                        else
+                        {
+                            GetCell(r, c).BackgroundColor = Color.Cyan;
+                        }
+                        #endregion
+                    }
                     else if (Maze[r, c] == 'O')
-                        GetCell(r, c).BackgroundColor = Color.Orange;
+                    {
+                        #region Orange
+                        if (PowerUp == true && OrangeVulnerable == true)
+                        {
+                            if (PowerTimer < 15) //Start to blink blue and white (after 6 seconds passed, or down to the last 15 frames(approx last 2 seconds))
+                            {
+                                if (PowerTimer % 2 == 0)
+                                    GetCell(r, c).BackgroundColor = Color.Blue;
+                                else
+                                    GetCell(r, c).BackgroundColor = Color.White;
+                            }
+                            else
+                            {
+                                GetCell(r, c).BackgroundColor = Color.Blue;
+                            }
+                        }
+                        else
+                        {
+                            GetCell(r, c).BackgroundColor = Color.Orange;
+                        }
+                        #endregion
+                    }
                     #endregion
 
                 }

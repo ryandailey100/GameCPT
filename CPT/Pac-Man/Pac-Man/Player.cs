@@ -9,9 +9,7 @@ namespace Pac_Man
 {
     public class Player
     {
-       
         
-
         private int row_Initial = 0;
         private int col_Initial = 0;
 
@@ -140,6 +138,8 @@ namespace Pac_Man
                 else if (Gameplay.GridOfMap.GetDots[PlayerRow - 1, PlayerCol] == 'o')
                 {
                     Gameplay.GridOfMap.GetScore += 50; //Adds 50
+                    Gameplay.GridOfMap.GetPowerUp = true;
+                    Gameplay.GridOfMap.GetPowerTimer = 55;
                 }
 
                 Gameplay.GridOfMap.GetDots[PlayerRow - 1, PlayerCol] = ','; //Eat a dot
@@ -161,6 +161,8 @@ namespace Pac_Man
                 else if (Gameplay.GridOfMap.GetDots[PlayerRow + 1, PlayerCol] == 'o')
                 {
                     Gameplay.GridOfMap.GetScore += 50; //Adds 50
+                    Gameplay.GridOfMap.GetPowerUp = true;
+                    Gameplay.GridOfMap.GetPowerTimer = 55;
                 }
 
 
@@ -182,6 +184,8 @@ namespace Pac_Man
                 else if (Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol - 1] == 'o')
                 {
                     Gameplay.GridOfMap.GetScore += 50; //Adds 50
+                    Gameplay.GridOfMap.GetPowerUp = true;
+                    Gameplay.GridOfMap.GetPowerTimer = 55;
                 }
 
                 Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol - 1] = ','; //Eat a dot
@@ -202,6 +206,8 @@ namespace Pac_Man
                 else if (Gameplay.GridOfMap.GetDots[PlayerRow, PlayerCol + 1] == 'o')
                 {
                     Gameplay.GridOfMap.GetScore += 50; //Adds 50
+                    Gameplay.GridOfMap.GetPowerUp = true;
+                    Gameplay.GridOfMap.GetPowerTimer = 55;
                 }
 
 
