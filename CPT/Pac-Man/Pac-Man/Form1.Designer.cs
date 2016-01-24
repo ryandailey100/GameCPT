@@ -81,10 +81,13 @@
             // ListMaps
             // 
             this.ListMaps.BackColor = System.Drawing.SystemColors.InfoText;
+            this.ListMaps.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListMaps.ForeColor = System.Drawing.Color.White;
             this.ListMaps.FormattingEnabled = true;
+            this.ListMaps.ItemHeight = 21;
             this.ListMaps.Location = new System.Drawing.Point(93, 313);
             this.ListMaps.Name = "ListMaps";
-            this.ListMaps.Size = new System.Drawing.Size(259, 238);
+            this.ListMaps.Size = new System.Drawing.Size(259, 235);
             this.ListMaps.TabIndex = 3;
             this.ListMaps.Visible = false;
             // 

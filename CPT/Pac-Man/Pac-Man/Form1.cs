@@ -35,6 +35,15 @@ namespace Pac_Man
                 File.Create((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\HighScore.txt"));
             }
 
+            //load listview with map names
+            DirectoryInfo Folder = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps");
+            FileInfo[] Maps = Folder.GetFiles();
+
+            foreach (FileInfo file in Maps)
+            {
+                ListMaps.Items.Add(file.Name);
+            }
+
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
