@@ -26,10 +26,80 @@ namespace Pac_Man
         static GhostAI PinkGhost;
         static GhostAI GreenGhost;
         static GhostAI OrangeGhost;
+
+        bool GamePaused = false;
         
 
-        public Gameplay()
+        public Gameplay(char[,] SelectedMaze)
         {
+            int rows = SelectedMaze.GetLength(0);
+            int cols = SelectedMaze.GetLength(1);
+
+            GridOfMap = new Grid(rows, cols, 20);
+
+            //initialize the Maze array
+            GridOfMap.GetDots = new char[rows, cols];
+            GridOfMap.GetMaze = new char[rows, cols];
+            GridOfMap.GetOriginalMaze = new char[rows, cols];
+
+            //Set the rows and cols of map
+            GridOfMap.GetRows = rows;
+            GridOfMap.GetCols = cols;
+
+            //populate the Maze array
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    GridOfMap.GetMaze[r, c] = SelectedMaze[r,c];
+                    GridOfMap.GetOriginalMaze[r, c] = SelectedMaze[r, c];
+                }
+            }
+
+
+            //Input all dots
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    if (GridOfMap.GetMaze[r, c] == '.')
+                        GridOfMap.GetDots[r, c] = '*';
+                    else
+                        GridOfMap.GetDots[r, c] = GridOfMap.GetMaze[r, c];
+                }
+
+            }
+
+            //Create Player Class
+            PlayerClass = new Player();
+
+            //Create All 4 Ghost AI's
+            RedGhost = new GhostAI(GhostAI.Ghost.Red);
+            PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
+            GreenGhost = new GhostAI(GhostAI.Ghost.Green);
+            OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
+
+
+
+            //configure grid so each cell is drawn properly
+            UpdateFrame();
+
+            //resize form to grid height and width
+            this.Width = GridOfMap.GetCols * 20 + 40;
+            this.Height = GridOfMap.GetRows * 20 + 100;
+
+            //Relocates form to center it again
+            //this.Left = 0;
+            //this.Top = 0;
+            
+
+            //tell form to redraw
+            this.Refresh();
+
+            //Start Timer
+            TimerUpdate.Start();
+
+
             InitializeComponent();
         }
 
@@ -43,8 +113,28 @@ namespace Pac_Man
 
         private void Gameplay_KeyDown(object sender, KeyEventArgs e)
         {
-
-            if (e.KeyCode == Keys.Up && PlayerClass.GetUpSpace == true)// && UpSpace == true
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (GamePaused == true) //Unpause
+                {
+                    GamePaused = false;
+                    TimerUpdate.Start();
+                    lbl_GameOver.Visible = false;
+                    lbl_PressPause.Visible = true;
+                    this.Refresh();
+                }
+                else if (GamePaused == false && GridOfMap.GetGameOver == false) //Pause game
+                {
+                    GamePaused = true;
+                    TimerUpdate.Stop();
+                    lbl_GameOver.Location = new Point(this.Height / 4, this.Width / 2);
+                    lbl_GameOver.Text = "Paused";
+                    lbl_GameOver.Visible = true;
+                    lbl_PressPause.Visible = false;
+                    this.Refresh();
+                }
+            }
+            else if (e.KeyCode == Keys.Up && PlayerClass.GetUpSpace == true)// && UpSpace == true
                 PlayerClass.GetPlayerDir = Player.PlayerMovement.Up;
             else if (e.KeyCode == Keys.Down && PlayerClass.GetDownSpace == true)
                 PlayerClass.GetPlayerDir = Player.PlayerMovement.Down;
@@ -52,6 +142,7 @@ namespace Pac_Man
                 PlayerClass.GetPlayerDir = Player.PlayerMovement.Left;
             else if (e.KeyCode == Keys.Right && PlayerClass.GetRightSpace == true)
                 PlayerClass.GetPlayerDir = Player.PlayerMovement.Right;
+            
             
 
         }
@@ -66,88 +157,6 @@ namespace Pac_Man
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //get file from Open Dialog box
-            OpenFileDialog fd = new OpenFileDialog();
-
-            //don't forget error checking
-
-            if (fd.ShowDialog() == DialogResult.OK)
-            {
-                //load the file
-                StreamReader sr = new StreamReader(fd.OpenFile());
-
-                int rows = int.Parse(sr.ReadLine());
-                int cols = int.Parse(sr.ReadLine());
-
-                GridOfMap = new Grid(rows, cols, 20);
-                GridOfMap.GetDots = new char[rows, cols];
-
-                //initialize the Maze array
-                GridOfMap.GetMaze = new char[rows, cols];
-                GridOfMap.GetOriginalMaze = new char[rows, cols];
-
-                //Set the rows and cols of map
-                GridOfMap.GetRows = rows;
-                GridOfMap.GetCols = cols;
-
-                
-                //populate the Maze array
-                for (int r = 0; r < rows; r++)
-                {
-                    string line = sr.ReadLine();
-                    for (int c = 0; c < cols; c++)
-                    {
-                        GridOfMap.GetMaze[r, c] = line[c];
-                        GridOfMap.GetOriginalMaze[r, c] = line[c];
-                    }
-                }
-
-
-                //Input all dots
-                for (int r = 0; r < rows; r++)
-                {
-                    for (int c = 0; c < cols; c++)
-                    {
-                        if (GridOfMap.GetMaze[r, c] == '.')
-                            GridOfMap.GetDots[r, c] = '*';
-                        else
-                            GridOfMap.GetDots[r, c] = GridOfMap.GetMaze[r, c];
-                    }
-
-                }
-
-                //Create Player Class
-                PlayerClass = new Player();
-                
-                //Create All 4 Ghost AI's
-                RedGhost = new GhostAI(GhostAI.Ghost.Red);
-                PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
-                GreenGhost = new GhostAI(GhostAI.Ghost.Green);
-                OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
-
-
-
-                //configure grid so each cell is drawn properly
-                UpdateFrame();
-
-                //resize form to grid height and width
-                this.Width = GridOfMap.GetCols * 20 + 40;
-                this.Height = GridOfMap.GetRows * 20 + 100;
-
-               
-
-                //tell form to redraw
-                this.Refresh();
-
-                //Start Timer
-                TimerUpdate.Start();
-
-                button1.Enabled = false;
-
-            }
-        }
 
         private void UpdateFrame()
         {
@@ -302,7 +311,9 @@ namespace Pac_Man
 
             //Show Game Over Label
             lbl_GameOver.Location = new Point(this.Height / 4, this.Width / 2);
+            lbl_GameOver.Text = "Game Over!";
             lbl_GameOver.Visible = true;
+            lbl_PressPause.Visible = false;
             this.Refresh();
 
             //Delay 3 seconds before returning to highscore menu
