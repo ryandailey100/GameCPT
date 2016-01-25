@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Pac_Man
 {
@@ -21,6 +22,8 @@ namespace Pac_Man
             InitializeComponent();
         }
 
+        //music
+        SoundPlayer bgGameMusic = new SoundPlayer(Resource1._8bits);
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -32,6 +35,10 @@ namespace Pac_Man
             this.BackgroundImage = Resource1.Menu___Blank;
             btnStart.Visible = false;
             ListMaps.Location = new Point(282, 301);
+
+            //play music
+            bgGameMusic.PlayLooping();
+
 
             //create application folder structure in usr appdata, prevents problems
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Not-Pacman"))
@@ -149,12 +156,15 @@ namespace Pac_Man
             {
                 lblOff.ForeColor = Color.Maroon;
                 lblOn.ForeColor = Color.White;
+                bgGameMusic.Stop();
+
             }
 
             else if (e.KeyCode == Keys.Enter && pic_Arrow.Location.X == 430)
             {
                 lblOff.ForeColor = Color.White;
                 lblOn.ForeColor = Color.Maroon;
+                bgGameMusic.PlayLooping();
             }
 
             else if (e.KeyCode == Keys.Escape && pic_Arrow.Location.X == 430 || pic_Arrow.Location.X == 520)
@@ -243,6 +253,11 @@ namespace Pac_Man
             this.BackgroundImage = Resource1.Menu___About;
             lblAbouttxt.Visible = true;
             pic_Arrow.Location = new Point(105, 333);
+        }
+
+        private void ListMaps_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pic_Arrow.Location = new Point(286, 506);
         }
     }
 }

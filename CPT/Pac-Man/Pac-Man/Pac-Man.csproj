@@ -122,12 +122,6 @@
     <None Include="Resources\Menu - Blank.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Sprites.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Menu - Name.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Menu - Options.png" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +159,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Menu - About.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pokemon Theme Song - 8 Bit.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8bits.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

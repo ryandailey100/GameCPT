@@ -45,7 +45,7 @@
             // pic_Arrow
             // 
             this.pic_Arrow.Image = global::Pac_Man.Resource1.Menu___Arrow;
-            this.pic_Arrow.Location = new System.Drawing.Point(105, 333);
+            this.pic_Arrow.Location = new System.Drawing.Point(286, 506);
             this.pic_Arrow.Name = "pic_Arrow";
             this.pic_Arrow.Size = new System.Drawing.Size(26, 33);
             this.pic_Arrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -90,11 +90,12 @@
             this.ListMaps.ForeColor = System.Drawing.Color.White;
             this.ListMaps.FormattingEnabled = true;
             this.ListMaps.ItemHeight = 21;
-            this.ListMaps.Location = new System.Drawing.Point(627, 357);
+            this.ListMaps.Location = new System.Drawing.Point(638, 350);
             this.ListMaps.Name = "ListMaps";
             this.ListMaps.Size = new System.Drawing.Size(259, 193);
             this.ListMaps.TabIndex = 3;
             this.ListMaps.Visible = false;
+            this.ListMaps.SelectedIndexChanged += new System.EventHandler(this.ListMaps_SelectedIndexChanged);
             // 
             // btnStart
             // 
