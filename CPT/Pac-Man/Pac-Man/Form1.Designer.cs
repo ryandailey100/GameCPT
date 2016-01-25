@@ -85,7 +85,7 @@
             this.ListMaps.ForeColor = System.Drawing.Color.White;
             this.ListMaps.FormattingEnabled = true;
             this.ListMaps.ItemHeight = 21;
-            this.ListMaps.Location = new System.Drawing.Point(93, 313);
+            this.ListMaps.Location = new System.Drawing.Point(282, 301);
             this.ListMaps.Name = "ListMaps";
             this.ListMaps.Size = new System.Drawing.Size(259, 235);
             this.ListMaps.TabIndex = 3;

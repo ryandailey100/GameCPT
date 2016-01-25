@@ -56,17 +56,36 @@ namespace Pac_Man
             //create application folder structure
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Local\Not-Pacman"))
             {
+                //create map folders
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps");
-                File.Create((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\HighScore.txt"));
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map1");
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map2");
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map3");
+                
+                //create highscore txt files
+                File.Create((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map1\HighScore.txt"));
+                File.Create((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map2\HighScore.txt"));
+                File.Create((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map3\HighScore.txt"));
+
+                //input map files into folders
+                StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map1\PacMap1.txt");
+                string txtMap = Resource1.PacMap1;
+
+                sw.Write(txtMap);
+                sw.Close();
             }
 
             //load listview with map names
             DirectoryInfo Folder = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps");
-            FileInfo[] Maps = Folder.GetFiles();
+            FileInfo[] Maps = Folder.GetFiles("*.txt");
+
 
             foreach (FileInfo file in Maps)
             {
-                ListMaps.Items.Add(file.Name);
+                if (file.Name != "HighScore.txt")
+                {
+                    ListMaps.Items.Add(file.Name);
+                }    
             }
 
         }
