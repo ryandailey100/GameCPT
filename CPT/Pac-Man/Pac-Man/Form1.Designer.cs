@@ -34,6 +34,7 @@
             this.lblOn = new System.Windows.Forms.Label();
             this.lblOff = new System.Windows.Forms.Label();
             this.ListMaps = new System.Windows.Forms.ListBox();
+            this.btnPlay = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Arrow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,9 +88,18 @@
             this.ListMaps.ItemHeight = 21;
             this.ListMaps.Location = new System.Drawing.Point(282, 301);
             this.ListMaps.Name = "ListMaps";
-            this.ListMaps.Size = new System.Drawing.Size(259, 235);
+            this.ListMaps.Size = new System.Drawing.Size(259, 193);
             this.ListMaps.TabIndex = 3;
             this.ListMaps.Visible = false;
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.Location = new System.Drawing.Point(361, 509);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(101, 41);
+            this.btnPlay.TabIndex = 4;
+            this.btnPlay.Text = "Begin Game";
+            this.btnPlay.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -98,6 +108,7 @@
             this.BackgroundImage = global::Pac_Man.Resource1.Menu___Maps;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(815, 588);
+            this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.pic_Arrow);
             this.Controls.Add(this.ListMaps);
             this.Controls.Add(this.lblOff);
@@ -122,6 +133,7 @@
         private System.Windows.Forms.Label lblOn;
         private System.Windows.Forms.Label lblOff;
         private System.Windows.Forms.ListBox ListMaps;
+        private System.Windows.Forms.Button btnPlay;
     }
 }
 
