@@ -133,7 +133,7 @@ namespace Pac_Man {
         ///############################
         ///#............##............#
         ///#.####.#####.##.#####.####.#
-        ///######.#####.##.#####.######
+        ///#.####.#####.##.#####.####.#
         ///#.####.#####.##.#####.####.#
         ///#...........o##o...........#
         ///#.#######.########.#######.#
@@ -178,6 +178,16 @@ namespace Pac_Man {
         internal static string PacMap3 {
             get {
                 return ResourceManager.GetString("PacMap3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Start_button {
+            get {
+                object obj = ResourceManager.GetObject("Start_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -96,9 +96,11 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(361, 509);
+            this.btnStart.Image = global::Pac_Man.Resource1.Start_button;
+            this.btnStart.Location = new System.Drawing.Point(318, 488);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(100, 50);
+            this.btnStart.Size = new System.Drawing.Size(189, 98);
+            this.btnStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnStart.TabIndex = 4;
             this.btnStart.TabStop = false;
             this.btnStart.Visible = false;
@@ -126,11 +128,11 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(815, 588);
             this.Controls.Add(this.lblBack);
-            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.pic_Arrow);
             this.Controls.Add(this.ListMaps);
             this.Controls.Add(this.lblOff);
             this.Controls.Add(this.lblOn);
+            this.Controls.Add(this.btnStart);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
