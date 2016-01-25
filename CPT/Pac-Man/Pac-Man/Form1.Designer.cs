@@ -43,7 +43,7 @@
             // pic_Arrow
             // 
             this.pic_Arrow.Image = global::Pac_Man.Resource1.Menu___Arrow;
-            this.pic_Arrow.Location = new System.Drawing.Point(250, 296);
+            this.pic_Arrow.Location = new System.Drawing.Point(250, 317);
             this.pic_Arrow.Name = "pic_Arrow";
             this.pic_Arrow.Size = new System.Drawing.Size(26, 33);
             this.pic_Arrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

@@ -93,16 +93,6 @@ namespace Pac_Man {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Menu___Name {
-            get {
-                object obj = ResourceManager.GetObject("Menu___Name", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Menu___Options {
             get {
                 object obj = ResourceManager.GetObject("Menu___Options", resourceCulture);
@@ -143,12 +133,12 @@ namespace Pac_Man {
         ///############################
         ///#............##............#
         ///#.####.#####.##.#####.####.#
-        ///#o####.#####.##.#####.####o#
+        ///######.#####.##.#####.######
         ///#.####.#####.##.#####.####.#
+        ///#...........o##o...........#
+        ///#.#######.########.#######.#
+        ///#.#######.########.#######.#
         ///#..........................#
-        ///#.####.##.########.##.####.#
-        ///#.####.##.########.##.####.#
-        ///#......##....##....##......#
         ///######.#####,##,#####.######
         ///=====#.#####,##,#####.#=====
         ///=====#.##,,,,,,,,,,##.#=====
@@ -178,26 +168,16 @@ namespace Pac_Man {
         ///#o.....##....##....##.....o#
         ///######.#####,##,#####.######
         ///=====#.#####,##,#####.#=====
-        ///=====#.##,,,,,,,,,,##.,,,,,&amp;
+        ///=====#.##,,,,,,,,,,##.#=====
         ///=====#.##,###==###,##.#=====
         ///######.##,#======#,##.######
-        ///#,,,,#.,,,#=RPGO=#,,,.#,,,,#
+        ///&amp;,,,,,.,,,#=RPGO=#,,,.,,,,,&amp;
         ///######.##,#======#,##.######
         ///=====#.##,########,##.#= [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PacMap3 {
             get {
                 return ResourceManager.GetString("PacMap3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Sprites {
-            get {
-                object obj = ResourceManager.GetObject("Sprites", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
