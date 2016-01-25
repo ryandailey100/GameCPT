@@ -63,6 +63,16 @@ namespace Pac_Man {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Menu___About {
+            get {
+                object obj = ResourceManager.GetObject("Menu___About", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Menu___Arrow {
             get {
                 object obj = ResourceManager.GetObject("Menu___Arrow", resourceCulture);

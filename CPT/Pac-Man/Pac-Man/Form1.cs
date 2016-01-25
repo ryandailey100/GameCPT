@@ -31,8 +31,9 @@ namespace Pac_Man
             lblOff.Location = new Point(550, 325);
             this.BackgroundImage = Resource1.Menu___Blank;
             btnStart.Visible = false;
+            ListMaps.Location = new Point(282, 301);
 
-            //create application folder structure
+            //create application folder structure in usr appdata, prevents problems
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Not-Pacman"))
             {
                 //create map folders
@@ -103,19 +104,20 @@ namespace Pac_Man
                 this.BackgroundImage = Resource1.Menu___Maps;
                 ListMaps.Visible = true;
                 ListMaps.Enabled = true;
-                pic_Arrow.Location = new Point(250, 296);
+                pic_Arrow.Location = new Point(268, 255);
                 btnStart.Visible = true;
                 lblBack.Visible = true;
             }
 
             //back buttton
-            else if (e.KeyCode == Keys.Escape && pic_Arrow.Location.X == 248)
+            else if (e.KeyCode == Keys.Escape)
             {
                 ListMaps.Visible = false;
                 lblOff.Visible = false;
                 lblOn.Visible = false;
                 btnStart.Visible = false;
                 ListMaps.Enabled = false;
+                lblAbouttxt.Visible = false;
 
                 pic_Arrow.Location = new Point(294, 306);
 
@@ -234,6 +236,13 @@ namespace Pac_Man
         {
             if (Application.OpenForms.Count == 0)
                 Application.Exit();
+        }
+
+        private void lblAbout_Click(object sender, EventArgs e)
+        {
+            this.BackgroundImage = Resource1.Menu___About;
+            lblAbouttxt.Visible = true;
+            pic_Arrow.Location = new Point(105, 333);
         }
     }
 }
