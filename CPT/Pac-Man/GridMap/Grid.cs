@@ -298,7 +298,7 @@ namespace GridMap
             {
                 for (int j = 0; j < this.mColumns; j++)
                 {
-                    mGrid[i, j] = new Cell();
+                    mGrid[i, j] = new Cell(CellSize);
                 }
             }
 

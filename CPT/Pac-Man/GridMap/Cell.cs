@@ -14,19 +14,18 @@ namespace GridMap
         private Color mBackgroundColour;
 
         //Constructors
-        public Cell()
+        public Cell(int CellSize)
         {
-            //default to white cell with a black border
-            this.mSize = 20;
+            this.mSize = CellSize;
             this.mBackgroundColour = Color.White;
         }
 
-        public Cell(int Size, Color BackgroundColour, Color BorderColour)
-        {
-            this.mSize = Size;
-            this.mBackgroundColour = BackgroundColour;
+        //public Cell(int Size, Color BackgroundColour, Color BorderColour)
+        //{
+        //    this.mSize = Size;
+        //    this.mBackgroundColour = BackgroundColour;
 
-        }
+        //}
 
         //Properties
         public int Size
