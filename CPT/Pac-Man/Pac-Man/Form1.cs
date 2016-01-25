@@ -270,7 +270,7 @@ namespace Pac_Man
 
         private void ListMaps_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pic_Arrow.Location = new Point(286, 506);
+            pic_Arrow.Location = new Point(290, 520);
         }
     }
 }
