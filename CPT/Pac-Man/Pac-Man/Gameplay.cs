@@ -28,9 +28,10 @@ namespace Pac_Man
         static GhostAI OrangeGhost;
 
         bool GamePaused = false;
-        
 
-        public Gameplay(char[,] SelectedMaze)
+        private string HighScorePath;
+
+        public Gameplay(char[,] SelectedMaze, string MapDirectory)
         {
             InitializeComponent(); 
 
@@ -72,6 +73,17 @@ namespace Pac_Man
 
             }
 
+            HighScorePath = MapDirectory + @"\HighScore.txt";
+
+            StreamReader sr = new StreamReader(HighScorePath);
+            string SavedScore = sr.ReadLine();
+
+            if (SavedScore != null) //Checks if it is null
+                GridOfMap.GetHighScore = int.Parse(SavedScore);
+
+            lbl_Highscore.Text = GridOfMap.GetHighScore.ToString();
+            sr.Close();
+
             //Create Player Class
             PlayerClass = new Player();
 
@@ -93,8 +105,7 @@ namespace Pac_Man
             //tell form to redraw
             this.Refresh();
 
-           
-
+            
             //Start Timer
             TimerUpdate.Start();
 
@@ -156,7 +167,6 @@ namespace Pac_Man
 
         }
 
-
         private void UpdateFrame()
         {
             //===Player Movement===
@@ -195,6 +205,12 @@ namespace Pac_Man
             GridOfMap.PaintGrid();
             this.Refresh();
             
+            if (GridOfMap.GetDeath == true)
+            {
+                GridOfMap.GetDeath = false;
+                //Delay 1 second
+                System.Threading.Thread.Sleep(1000);
+            }
 
             //Update label
             lbl_Score.Text = GridOfMap.GetScore.ToString();
@@ -242,8 +258,7 @@ namespace Pac_Man
                 GameOver();
 
         }
-
-
+        
         public static void ResetObjects()
         {
             //Player
@@ -254,7 +269,6 @@ namespace Pac_Man
             PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
             GreenGhost = new GhostAI(GhostAI.Ghost.Green);
             OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
-
             
         }
 
@@ -314,6 +328,17 @@ namespace Pac_Man
             lbl_GameOver.Visible = true;
             lbl_PressPause.Visible = false;
             this.Refresh();
+
+            
+            //Highscore
+            if (GridOfMap.GetHighScore < GridOfMap.GetScore)
+            {
+                //Overwrite Highscore
+                StreamWriter sw = new StreamWriter(HighScorePath);
+                sw.Write(GridOfMap.GetScore);
+                sw.Close();
+            }
+
 
             //Delay 3 seconds before returning to highscore menu
             System.Threading.Thread.Sleep(3000);

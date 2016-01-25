@@ -36,6 +36,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lbl_GameOver = new System.Windows.Forms.Label();
             this.lbl_PressPause = new System.Windows.Forms.Label();
+            this.lbl_Highscore = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TimerUpdate
@@ -48,7 +50,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(485, 43);
+            this.label1.Location = new System.Drawing.Point(303, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 42);
             this.label1.TabIndex = 1;
@@ -59,7 +61,7 @@
             this.lbl_Score.AutoSize = true;
             this.lbl_Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Score.ForeColor = System.Drawing.Color.White;
-            this.lbl_Score.Location = new System.Drawing.Point(612, 43);
+            this.lbl_Score.Location = new System.Drawing.Point(430, 43);
             this.lbl_Score.Name = "lbl_Score";
             this.lbl_Score.Size = new System.Drawing.Size(40, 42);
             this.lbl_Score.TabIndex = 2;
@@ -70,7 +72,7 @@
             this.lbl_Lives.AutoSize = true;
             this.lbl_Lives.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Lives.ForeColor = System.Drawing.Color.White;
-            this.lbl_Lives.Location = new System.Drawing.Point(369, 43);
+            this.lbl_Lives.Location = new System.Drawing.Point(187, 43);
             this.lbl_Lives.Name = "lbl_Lives";
             this.lbl_Lives.Size = new System.Drawing.Size(40, 42);
             this.lbl_Lives.TabIndex = 4;
@@ -81,7 +83,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(252, 43);
+            this.label4.Location = new System.Drawing.Point(70, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(122, 42);
             this.label4.TabIndex = 3;
@@ -111,12 +113,36 @@
             this.lbl_PressPause.TabIndex = 6;
             this.lbl_PressPause.Text = "Press Esc to Pause";
             // 
+            // lbl_Highscore
+            // 
+            this.lbl_Highscore.AutoSize = true;
+            this.lbl_Highscore.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Highscore.ForeColor = System.Drawing.Color.White;
+            this.lbl_Highscore.Location = new System.Drawing.Point(751, 43);
+            this.lbl_Highscore.Name = "lbl_Highscore";
+            this.lbl_Highscore.Size = new System.Drawing.Size(40, 42);
+            this.lbl_Highscore.TabIndex = 8;
+            this.lbl_Highscore.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(553, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(207, 42);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Highscore:";
+            // 
             // Gameplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(884, 626);
+            this.Controls.Add(this.lbl_Highscore);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_PressPause);
             this.Controls.Add(this.lbl_GameOver);
             this.Controls.Add(this.lbl_Lives);
@@ -145,5 +171,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbl_GameOver;
         private System.Windows.Forms.Label lbl_PressPause;
+        private System.Windows.Forms.Label lbl_Highscore;
+        private System.Windows.Forms.Label label3;
     }
 }

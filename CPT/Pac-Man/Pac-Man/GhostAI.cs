@@ -698,6 +698,8 @@ namespace Pac_Man
                     }
                     else
                     {
+                        Gameplay.GridOfMap.GetDeath = true;
+
                         Gameplay.GridOfMap.SubtractLife();
 
                         Gameplay.GridOfMap.GetPowerUp = false;
@@ -718,6 +720,7 @@ namespace Pac_Man
 
                         //reset all ghosts and player classes
                         Gameplay.ResetObjects();
+                        
                     }
                     return true;
                 }

@@ -24,6 +24,21 @@ namespace GridMap
 
         private int Score = 0;
         private int Lives = 3;
+        private int HighScore = 0;
+
+        bool Death = false;
+
+        public bool GetDeath
+        {
+            get { return Death; }
+            set { Death = value; }
+        }
+
+        public int GetHighScore
+        {
+            get { return HighScore; }
+            set { HighScore = value; }
+        }
 
         //Special Dot Power Up
         bool PowerUp = false;

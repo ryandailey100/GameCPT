@@ -55,7 +55,7 @@ namespace Pac_Man
             btnStart.Visible = false;
 
             //create application folder structure
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Local\Not-Pacman"))
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Not-Pacman"))
             {
                 //create map folders
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps");
@@ -212,7 +212,7 @@ namespace Pac_Man
                     if (file.Name == FileName)
                     {
                         //---load the file---
-                        StreamReader sr = new StreamReader(file.FullName);  //<--load file from resources
+                        StreamReader sr = new StreamReader(file.FullName);
 
                         int rows = int.Parse(sr.ReadLine());
                         int cols = int.Parse(sr.ReadLine());
@@ -228,8 +228,8 @@ namespace Pac_Man
                                 MapSelected[r, c] = line[c];
                             }
                         }
-
-                        Gameplay GameplayForm = new Gameplay(MapSelected);
+                        sr.Close();
+                        Gameplay GameplayForm = new Gameplay(MapSelected, file.DirectoryName);
                         GameplayForm.Show();
 
                         this.Close();
