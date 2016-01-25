@@ -70,10 +70,18 @@ namespace Pac_Man
 
                 //input map files into folders
                 StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map1\PacMap1.txt");
+                StreamWriter sw2 = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map2\PacMap2.txt");
+                StreamWriter sw3 = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps\Map3\PacMap3.txt");
                 string txtMap = Resource1.PacMap1;
+                string txtMap2 = Resource1.PacMap2;
+                string txtMap3 = Resource1.PacMap3;
 
                 sw.Write(txtMap);
+                sw2.Write(txtMap2);
+                sw3.Write(txtMap3);      
                 sw.Close();
+                sw2.Close();
+                sw3.Close();
             }
 
             //load listview with map names
@@ -237,6 +245,7 @@ namespace Pac_Man
             lblOn.Visible = false;
             btnStart.Visible = false;
             ListMaps.Enabled = false;
+            lblBack.Visible = false;
 
             pic_Arrow.Location = new Point(294, 306);
 
