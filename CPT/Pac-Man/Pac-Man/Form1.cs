@@ -114,6 +114,10 @@ namespace Pac_Man
                 pic_Arrow.Location = new Point(268, 255);
                 btnStart.Visible = true;
                 lblBack.Visible = true;
+                lblAbout.Visible = false;
+
+                if (ListMaps.SelectedIndex >= 0)
+                    pic_Arrow.Location = new Point(290, 520);
             }
 
             //back buttton
@@ -125,6 +129,8 @@ namespace Pac_Man
                 btnStart.Visible = false;
                 ListMaps.Enabled = false;
                 lblAbouttxt.Visible = false;
+                lblAbout.Visible = true;
+                lblBack.Visible = false;
 
                 pic_Arrow.Location = new Point(294, 306);
 
@@ -136,6 +142,8 @@ namespace Pac_Man
             {
                 lblOff.Visible = true;
                 lblOn.Visible = true;
+                lblAbout.Visible = false;
+                lblBack.Visible = true;
 
                 pic_Arrow.Location = new Point(430, 324);
 
@@ -236,6 +244,8 @@ namespace Pac_Man
             btnStart.Visible = false;
             ListMaps.Enabled = false;
             lblBack.Visible = false;
+            lblAbouttxt.Visible = false;
+            lblAbout.Visible = true;
 
             pic_Arrow.Location = new Point(294, 306);
 
@@ -252,7 +262,15 @@ namespace Pac_Man
         {
             this.BackgroundImage = Resource1.Menu___About;
             lblAbouttxt.Visible = true;
-            pic_Arrow.Location = new Point(105, 333);
+            pic_Arrow.Location = new Point(105, 355);
+            lblAbout.Visible = false;
+            lblBack.Visible = true;
+
+        }
+
+        private void ListMaps_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pic_Arrow.Location = new Point(290, 520);
         }
 
         private void ListMaps_SelectedIndexChanged(object sender, EventArgs e)

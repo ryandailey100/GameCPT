@@ -115,7 +115,7 @@
             this.lblBack.BackColor = System.Drawing.Color.Transparent;
             this.lblBack.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBack.ForeColor = System.Drawing.Color.Maroon;
-            this.lblBack.Location = new System.Drawing.Point(12, 9);
+            this.lblBack.Location = new System.Drawing.Point(27, 556);
             this.lblBack.Name = "lblBack";
             this.lblBack.Size = new System.Drawing.Size(62, 23);
             this.lblBack.TabIndex = 5;
@@ -130,7 +130,7 @@
             this.lblAbout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAbout.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAbout.ForeColor = System.Drawing.Color.White;
-            this.lblAbout.Location = new System.Drawing.Point(12, 556);
+            this.lblAbout.Location = new System.Drawing.Point(12, 17);
             this.lblAbout.Name = "lblAbout";
             this.lblAbout.Size = new System.Drawing.Size(77, 25);
             this.lblAbout.TabIndex = 6;
@@ -146,9 +146,9 @@
             this.lblAbouttxt.ForeColor = System.Drawing.Color.White;
             this.lblAbouttxt.Location = new System.Drawing.Point(135, 338);
             this.lblAbouttxt.Name = "lblAbouttxt";
-            this.lblAbouttxt.Size = new System.Drawing.Size(584, 71);
+            this.lblAbouttxt.Size = new System.Drawing.Size(493, 94);
             this.lblAbouttxt.TabIndex = 7;
-            this.lblAbouttxt.Text = "NOT Pac-Man by: Ryan Dailey & Andrew Cascone\r\n\r\nVersion 1.0.0";
+            this.lblAbouttxt.Text = "NOT Pac-Man \r\nMade by: Ryan Dailey & Andrew Cascone\r\n\r\nVersion 1.0.0";
             this.lblAbouttxt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblAbouttxt.UseMnemonic = false;
             this.lblAbouttxt.Visible = false;
@@ -169,7 +169,8 @@
             this.Controls.Add(this.lblOn);
             this.Controls.Add(this.btnStart);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NOT Pac-Man";
