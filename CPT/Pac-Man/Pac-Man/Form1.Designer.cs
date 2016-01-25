@@ -100,6 +100,7 @@
             this.btnPlay.TabIndex = 4;
             this.btnPlay.Text = "Begin Game";
             this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // Form1
             // 

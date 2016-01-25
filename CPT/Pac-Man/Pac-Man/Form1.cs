@@ -77,15 +77,20 @@ namespace Pac_Man
 
             //load listview with map names
             DirectoryInfo Folder = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps");
-            FileInfo[] Maps = Folder.GetFiles("*.txt");
 
+            DirectoryInfo[] MapFolders = Folder.GetDirectories();
 
-            foreach (FileInfo file in Maps)
+            foreach (DirectoryInfo TheMapFolder in MapFolders)
             {
-                if (file.Name != "HighScore.txt")
+                FileInfo[] Maps = TheMapFolder.GetFiles("*.txt");
+
+                foreach (FileInfo file in Maps)
                 {
-                    ListMaps.Items.Add(file.Name);
-                }    
+                    if (file.Name != "HighScore.txt")
+                    {
+                        ListMaps.Items.Add(file.Name);
+                    }
+                }
             }
 
         }
@@ -179,6 +184,12 @@ namespace Pac_Man
         {
             if (Application.OpenForms.Count == 0)
                 Application.Exit();
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            string sdsd = (string)ListMaps.SelectedItem;
+            MessageBox.Show(sdsd);
         }
     }
 }
