@@ -1,4 +1,6 @@
-﻿using System;
+﻿//By: Ryan Dailey & Andrew Cascone
+//Grade 12 Computer Science CPT
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,35 +15,11 @@ namespace Pac_Man
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        //---load the file---
-        //StreamReader sr = new StreamReader(MapHere);  //<--load file from resources
-
-        //    int rows = int.Parse(sr.ReadLine());
-        //    int cols = int.Parse(sr.ReadLine());
-
-              //char[,] MapSelected = new char[rows, cols];
-
-        ////populate the Maze array
-        //for (int r = 0; r < rows; r++)
-        //{
-        //    string line = sr.ReadLine();
-        //    for (int c = 0; c < cols; c++)
-        //    {
-        //        MapSelected[r, c] = line[c];
-        //    }
-        //}
-
-            //Gameplay GameplayForm = new Gameplay(MapSelected);
-            //Gameplay.Show();
-
-            //this.Close();
-
-            //---------
 
 
         private void Form1_Load(object sender, EventArgs e)

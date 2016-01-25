@@ -1,4 +1,6 @@
-﻿using System;
+﻿//By: Ryan Dailey & Andrew Cascone
+//Grade 12 Computer Science CPT
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
