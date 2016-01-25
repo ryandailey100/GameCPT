@@ -52,6 +52,7 @@ namespace Pac_Man
             lblOn.Location = new Point(462, 325);
             lblOff.Location = new Point(550, 325);
             this.BackgroundImage = Resource1.Menu___Blank;
+            btnStart.Visible = false;
 
             //create application folder structure
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Local\Not-Pacman"))
@@ -115,7 +116,10 @@ namespace Pac_Man
             {
                 this.BackgroundImage = Resource1.Menu___Maps;
                 ListMaps.Visible = true;
-                pic_Arrow.Location = new Point(61, 309);
+                ListMaps.Enabled = true;
+                pic_Arrow.Location = new Point(250, 296);
+                btnStart.Visible = true;
+                lblBack.Visible = true;
             }
 
             //back buttton
@@ -124,6 +128,8 @@ namespace Pac_Man
                 ListMaps.Visible = false;
                 lblOff.Visible = false;
                 lblOn.Visible = false;
+                btnStart.Visible = false;
+                ListMaps.Enabled = false;
 
                 pic_Arrow.Location = new Point(294, 306);
 
@@ -180,16 +186,29 @@ namespace Pac_Man
             pic_Arrow.Visible = !pic_Arrow.Visible;
         }
 
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            string sdsd = (string)ListMaps.SelectedItem;
+            MessageBox.Show(sdsd);
+        }
+
+        private void lblBack_Click(object sender, EventArgs e)
+        {
+            ListMaps.Visible = false;
+            lblOff.Visible = false;
+            lblOn.Visible = false;
+            btnStart.Visible = false;
+            ListMaps.Enabled = false;
+
+            pic_Arrow.Location = new Point(294, 306);
+
+            this.BackgroundImage = Resource1.Menu___Blank;
+        }
+
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (Application.OpenForms.Count == 0)
                 Application.Exit();
-        }
-
-        private void btnPlay_Click(object sender, EventArgs e)
-        {
-            string sdsd = (string)ListMaps.SelectedItem;
-            MessageBox.Show(sdsd);
         }
     }
 }

@@ -34,14 +34,16 @@
             this.lblOn = new System.Windows.Forms.Label();
             this.lblOff = new System.Windows.Forms.Label();
             this.ListMaps = new System.Windows.Forms.ListBox();
-            this.btnPlay = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.PictureBox();
+            this.lblBack = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Arrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnStart)).BeginInit();
             this.SuspendLayout();
             // 
             // pic_Arrow
             // 
             this.pic_Arrow.Image = global::Pac_Man.Resource1.Menu___Arrow;
-            this.pic_Arrow.Location = new System.Drawing.Point(777, 78);
+            this.pic_Arrow.Location = new System.Drawing.Point(250, 296);
             this.pic_Arrow.Name = "pic_Arrow";
             this.pic_Arrow.Size = new System.Drawing.Size(26, 33);
             this.pic_Arrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -92,15 +94,29 @@
             this.ListMaps.TabIndex = 3;
             this.ListMaps.Visible = false;
             // 
-            // btnPlay
+            // btnStart
             // 
-            this.btnPlay.Location = new System.Drawing.Point(361, 509);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(101, 41);
-            this.btnPlay.TabIndex = 4;
-            this.btnPlay.Text = "Begin Game";
-            this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            this.btnStart.Location = new System.Drawing.Point(361, 509);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(100, 50);
+            this.btnStart.TabIndex = 4;
+            this.btnStart.TabStop = false;
+            this.btnStart.Visible = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // lblBack
+            // 
+            this.lblBack.AutoSize = true;
+            this.lblBack.BackColor = System.Drawing.Color.Transparent;
+            this.lblBack.Font = new System.Drawing.Font("Courier New", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBack.ForeColor = System.Drawing.Color.Maroon;
+            this.lblBack.Location = new System.Drawing.Point(12, 9);
+            this.lblBack.Name = "lblBack";
+            this.lblBack.Size = new System.Drawing.Size(62, 23);
+            this.lblBack.TabIndex = 5;
+            this.lblBack.Text = "Back";
+            this.lblBack.Visible = false;
+            this.lblBack.Click += new System.EventHandler(this.lblBack_Click);
             // 
             // Form1
             // 
@@ -109,7 +125,8 @@
             this.BackgroundImage = global::Pac_Man.Resource1.Menu___Maps;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(815, 588);
-            this.Controls.Add(this.btnPlay);
+            this.Controls.Add(this.lblBack);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.pic_Arrow);
             this.Controls.Add(this.ListMaps);
             this.Controls.Add(this.lblOff);
@@ -119,9 +136,11 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NOT Pac-Man";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Arrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnStart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,7 +153,8 @@
         private System.Windows.Forms.Label lblOn;
         private System.Windows.Forms.Label lblOff;
         private System.Windows.Forms.ListBox ListMaps;
-        private System.Windows.Forms.Button btnPlay;
+        private System.Windows.Forms.PictureBox btnStart;
+        private System.Windows.Forms.Label lblBack;
     }
 }
 
