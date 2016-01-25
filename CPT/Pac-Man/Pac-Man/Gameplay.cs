@@ -32,6 +32,8 @@ namespace Pac_Man
 
         public Gameplay(char[,] SelectedMaze)
         {
+            InitializeComponent(); 
+
             int rows = SelectedMaze.GetLength(0);
             int cols = SelectedMaze.GetLength(1);
 
@@ -78,8 +80,7 @@ namespace Pac_Man
             PinkGhost = new GhostAI(GhostAI.Ghost.Pink);
             GreenGhost = new GhostAI(GhostAI.Ghost.Green);
             OrangeGhost = new GhostAI(GhostAI.Ghost.Orange);
-
-
+            
 
             //configure grid so each cell is drawn properly
             UpdateFrame();
@@ -88,19 +89,17 @@ namespace Pac_Man
             this.Width = GridOfMap.GetCols * 20 + 40;
             this.Height = GridOfMap.GetRows * 20 + 100;
 
-            //Relocates form to center it again
-            //this.Left = 0;
-            //this.Top = 0;
-            
 
             //tell form to redraw
             this.Refresh();
+
+           
 
             //Start Timer
             TimerUpdate.Start();
 
 
-            InitializeComponent();
+            
         }
 
         protected override void OnPaint(PaintEventArgs e)

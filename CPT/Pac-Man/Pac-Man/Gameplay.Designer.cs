@@ -127,6 +127,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Gameplay";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NOT Pac-Man";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Gameplay_FormClosed);
             this.Load += new System.EventHandler(this.Gameplay_Load);

@@ -188,8 +188,46 @@ namespace Pac_Man
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            string sdsd = (string)ListMaps.SelectedItem;
-            MessageBox.Show(sdsd);
+            string FileName = (string)ListMaps.SelectedItem;
+
+            //load listview with map names
+            DirectoryInfo Folder = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NOT-Pacman\Maps");
+
+            DirectoryInfo[] MapFolders = Folder.GetDirectories();
+
+            foreach (DirectoryInfo TheMapFolder in MapFolders)
+            {
+                FileInfo[] Maps = TheMapFolder.GetFiles("*.txt");
+
+                foreach (FileInfo file in Maps)
+                {
+                    if (file.Name == FileName)
+                    {
+                        //---load the file---
+                        StreamReader sr = new StreamReader(file.FullName);  //<--load file from resources
+
+                        int rows = int.Parse(sr.ReadLine());
+                        int cols = int.Parse(sr.ReadLine());
+
+                        char[,] MapSelected = new char[rows, cols];
+
+                        //populate the Maze array
+                        for (int r = 0; r < rows; r++)
+                        {
+                            string line = sr.ReadLine();
+                            for (int c = 0; c < cols; c++)
+                            {
+                                MapSelected[r, c] = line[c];
+                            }
+                        }
+
+                        Gameplay GameplayForm = new Gameplay(MapSelected);
+                        GameplayForm.Show();
+
+                        this.Close();
+                    }
+                }
+            }
         }
 
         private void lblBack_Click(object sender, EventArgs e)
