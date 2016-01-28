@@ -734,6 +734,9 @@ namespace Pac_Man
 
             if (RowOrCol == true) //Return Row
             {
+                if (r < 0 || r >= Gameplay.GridOfMap.GetRows)
+                    return 0;
+
                 if (Gameplay.GridOfMap.GetMaze[r, c] != '=' && Gameplay.GridOfMap.GetMaze[r, c] != '#' && Gameplay.GridOfMap.GetMaze[r, c] != 'R' && Gameplay.GridOfMap.GetMaze[r, c] != 'P' && Gameplay.GridOfMap.GetMaze[r, c] != 'G' && Gameplay.GridOfMap.GetMaze[r, c] != 'O')
                     return r;
                 else
@@ -754,6 +757,9 @@ namespace Pac_Man
             }
             else //Return Col
             {
+                if (c < 0 || c >= Gameplay.GridOfMap.GetCols)
+                    return 0;
+
                 if (Gameplay.GridOfMap.GetMaze[r, c] != '=' && Gameplay.GridOfMap.GetMaze[r, c] != '#' && Gameplay.GridOfMap.GetMaze[r, c] != 'R' && Gameplay.GridOfMap.GetMaze[r, c] != 'P' && Gameplay.GridOfMap.GetMaze[r, c] != 'G' && Gameplay.GridOfMap.GetMaze[r, c] != 'O')
                     return c;
                 else
